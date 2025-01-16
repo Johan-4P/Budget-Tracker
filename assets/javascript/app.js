@@ -38,3 +38,13 @@ function updateTotals() {
         document.getElementById("savings").innerText = `Savings Progress: ${progress.toFixed(2)}`;
     }
 }
+
+// Event listener for adding data
+
+addDataButton.addEventListener("click", () => {
+    const income = parseFloat(income.value) || 0;
+    const expense = parseFloat(expense.value) || 0;
+
+    totalIncome += income;
+    totalExpenses += expense 
+})
