@@ -30,7 +30,7 @@
                 <p class="text-center">
                     Glad that you did find this site, here you can get hold on your
                     economy. Plan your budget and your savings, and hold records on your
-                    transactions. Hope you think is useful.
+                    transactions. Hope you think this is useful.
                 </p>
             </div>
         </section>
@@ -38,8 +38,8 @@
     <main>
         <!-- Currency section -->
         <section id="currency" class="container">
-            <label for="currenct-select">Choose Currency</label>
-            <select id="currenct-select">
+            <label for="currency-select">Choose Currency</label>
+            <select id="currency-select">
                 <option value="USD">USD</option>
                 <option value="EUR">EUR</option>
                 <option value="SEK">SEK</option>
@@ -48,18 +48,27 @@
 
         <!-- Form section -->
         <section id="inputs" class="container">
-                <form id="budget-form">
-                    <input type="number" id="income" placeholder="Income" required>
-                    <input type="number" id="expense" placeholder="Expense" required>
-                    <button type="button" id="add-data">Add</button>
-                </form>
+            <form id="budget-form">
+                <input type="text" id="category" placeholder="Category" required> 
+                <select id="transactions">
+                    <option value="Income">Income</option>
+                    <option value="Expense">Expense</option>
+                </select>
+                <input type="number" id="amount" placeholder="Enter Amount" required>
+                <input type="date" id="date">
+                <button type="button" id="add-data">Add</button>
+            </form>
         </section>
         <!-- Summary section -->
         <div id="summary" class="card container">
-            <p><strong>Total:<span id="totalBalance">0</span></strong></p>
-            <p><strong>Income:<span id="totalIncome">0</span></strong></p>
-            <p><strong>Expense:<span id="totalExpenses">0</span></strong></p>
-            <p><strong>Savings:<span id="totalSavings">0</span></strong></p>
+            <p id="income">Income: 0</p>
+            <p id="expense">Expense: 0</p>
+            <p id="balance">Balance: 0</p>
+            <p id="savings">Savings: 0</p>
+            <label for="savingsGoal">Set Savings Goal:</label>
+            <input type="number" id="savingsGoal" placeholder="Enter savings goal" required>
+            <button id="goalBtn">Set Goal</button>
+            <p id="savingsProgress">Savings Progress: 0%</p>
         </div>
         <!-- Chart section -->
         <section>
