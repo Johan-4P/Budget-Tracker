@@ -36,14 +36,35 @@
         </section>
     </header>
     <main>
+        <!-- Currency section -->
+        <section id="currency" class="container">
+            <label for="currenct-select">Choose Currency</label>
+            <select id="currenct-select">
+                <option value="USD">USD</option>
+                <option value="EUR">EUR</option>
+                <option value="SEK">SEK</option>
+            </select>
+        </section>
+
+        <!-- Form section -->
         <section id="inputs" class="container">
-            <div class="card">
                 <form id="budget-form">
                     <input type="number" id="income" placeholder="Income" required>
                     <input type="number" id="expense" placeholder="Expense" required>
                     <button type="button" id="add-data">Add</button>
                 </form>
-            </div>
+        </section>
+        <!-- Summary section -->
+        <div id="summary" class="card container">
+            <p><strong>Total:<span id="totalBalance">0</span></strong></p>
+            <p><strong>Income:<span id="totalIncome">0</span></strong></p>
+            <p><strong>Expense:<span id="totalExpenses">0</span></strong></p>
+            <p><strong>Savings:<span id="totalSavings">0</span></strong></p>
+        </div>
+        <!-- Chart section -->
+        <section>
+            <canvas id="barChart"></canvas>
+            <canvas id="pieChart"></canvas>
         </section>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
