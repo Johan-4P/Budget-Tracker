@@ -50,30 +50,27 @@
         <section id="inputs" class="container">
             <form id="budget-form">
                 <input type="text" id="category" placeholder="Category" required> 
-                <select id="transactions">
-                    <option value="Income">Income</option>
-                    <option value="Expense">Expense</option>
-                </select>
-                <input type="number" id="amount" placeholder="Enter Amount" required>
+                <input type="number" id="income" placeholder="Enter Income" required>
+                <input type="number" id="expense" placeholder="Enter Expense" required>
                 <input type="date" id="date" required>
                 <button type="button" id="add-data">Add</button>
             </form>
         </section>
         <!-- Summary section -->
         <div id="summary" class="card container">
-            <p id="income">Income: 0</p>
-            <p id="expense">Expense: 0</p>
+            <p id="total-income">Income: 0</p>
+            <p id="total-expenses">Expense: 0</p>
             <p id="balance">Balance: 0</p>
             <p id="savings">Savings: 0</p>
             <label for="savingsGoal">Set Savings Goal:</label>
             <input type="number" id="savingsGoal" placeholder="Enter savings goal" required>
             <button id="goalBtn">Set Goal</button>
-            <p id="savingsProgress">Savings Progress: 0%</p>
+            <p id="savings-progress">Savings Progress: 0%</p>
         </div>
         <!-- Chart section -->
         <section>
             <canvas id="barChart"></canvas>
-            <canvas id="pieChart"></canvas>
+            <canvas id="incomeExpenseChart"></canvas>
         </section>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
