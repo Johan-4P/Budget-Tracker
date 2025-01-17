@@ -1,21 +1,27 @@
 document.addEventListener("DOMContentLoaded", () => {
     let totalIncome = 0;
     let totalExpenses = 0;
+    let savingsGoal = 0;
 
+    // Expense Categories
     const expenseCategories = {};
 
-    // Correctly selecting elements
+    // Elements
     const categoryInput = document.getElementById("category");
     const incomeInput = document.getElementById("income");
     const expenseInput = document.getElementById("expense");
     const dateInput = document.getElementById("date");
     const addDataButton = document.getElementById("add-data");
+    const savingsGoalInput = document.getElementById("savingsGoal");
+    const updateSavingsButton = document.getElementById("update-savings");
 
     const totalIncomeDisplay = document.getElementById("total-income");
     const totalExpensesDisplay = document.getElementById("total-expenses");
     const balanceDisplay = document.getElementById("balance");
+    const savingsGoalText = document.getElementById("savings-goal-text");
+    const savingsProgressText = document.getElementById("savings-progress-text");
 
-    // Pie Chart for Income vs. Expenses
+    // Pie Chart
     const pieCtx = document.getElementById("incomeExpenseChart").getContext("2d");
     const incomeExpenseChart = new Chart(pieCtx, {
         type: "pie",
@@ -30,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
         },
     });
 
-    // Bar Chart for Expense Categories
+    // Bar Chart
     const barCtx = document.getElementById("expenseBarChart").getContext("2d");
     const expenseBarChart = new Chart(barCtx, {
         type: "bar",
@@ -63,9 +69,17 @@ document.addEventListener("DOMContentLoaded", () => {
         totalIncomeDisplay.innerText = `Total Income: ${totalIncome.toFixed(2)}`;
         totalExpensesDisplay.innerText = `Total Expenses: ${totalExpenses.toFixed(2)}`;
         balanceDisplay.innerText = `Balance: ${balance.toFixed(2)}`;
+
+        // Update Savings Progress
+        if (savingsGoal > 0) {
+            const progress = (balance / savingsGoal) * 100;
+            savingsProgressText.innerText = `Savings Progress: ${progress.toFixed(2)}%`;
+        } else {
+            savingsProgressText.innerText = "Savings Progress: 0%";
+        }
     }
 
-    // Event Listener for Adding Data
+    // Event Listener: Add Data
     addDataButton.addEventListener("click", () => {
         const category = categoryInput.value.trim();
         const income = parseFloat(incomeInput.value) || 0;
@@ -90,9 +104,23 @@ document.addEventListener("DOMContentLoaded", () => {
         updateCharts();
         updateTotals();
 
+        // Clear inputs
         categoryInput.value = "";
         incomeInput.value = "";
         expenseInput.value = "";
         dateInput.value = "";
+    });
+
+    // Event Listener: Update Savings Goal
+    updateSavingsButton.addEventListener("click", () => {
+        savingsGoal = parseFloat(savingsGoalInput.value) || 0;
+
+        if (savingsGoal <= 0) {
+            alert("Please enter a valid savings goal.");
+            return;
+        }
+
+        savingsGoalText.innerText = `Savings Goal: $${savingsGoal.toFixed(2)}`;
+        updateTotals();
     });
 });
