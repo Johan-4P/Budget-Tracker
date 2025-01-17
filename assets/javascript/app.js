@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Expense Categories
     const expenseCategories = {};
+    const expenseList = [];
 
     // Elements
     const categoryInput = document.getElementById("category");
@@ -14,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const addDataButton = document.getElementById("add-data");
     const savingsGoalInput = document.getElementById("savingsGoal");
     const updateSavingsButton = document.getElementById("update-savings");
+    const expenseTableBody = document.getElementById("expense-table").querySelector("tbody")
 
     const totalIncomeDisplay = document.getElementById("total-income");
     const totalExpensesDisplay = document.getElementById("total-expenses");
@@ -79,6 +81,18 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    // Add Expense to table
+    function addExpenseToTable(category, amount, date) {
+        const newRow = document.createElement("tr");
+        newRow.innerHTML = `
+        <td>${category}</td>
+        <td>${amount.toFixed(2)}</td>
+        <td>${date}</td>
+        `;
+        expenseTableBody.prepend(newRow);
+        expenseTableBody.appendChild(newRow)
+    }
+
     // Event Listener: Add Data
     addDataButton.addEventListener("click", () => {
         const category = categoryInput.value.trim();
@@ -101,6 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
             expenseCategories[category] += expense;
         }
 
+        addExpenseToTable(category, expense, date);
         updateCharts();
         updateTotals();
 
