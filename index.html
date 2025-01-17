@@ -49,12 +49,17 @@
         <!-- Form section -->
         <section id="inputs" class="container">
             <form id="budget-form">
+                <label for="category">Enter Category:</label>
                 <input type="text" id="category" placeholder="Category" required> 
+                <label for="income">Income:</label>
                 <input type="number" id="income" placeholder="Enter Income" required>
+                <label for="expense">Expense:</label>
                 <input type="number" id="expense" placeholder="Enter Expense" required>
                 <input type="date" id="date" required>
                 <button type="button" id="add-data">Add</button>
+                
             </form>
+            
         </section>
         <!-- Summary section -->
         <div id="summary" class="card container">
@@ -69,7 +74,7 @@
         </div>
         <!-- Chart section -->
         <section>
-            <canvas id="barChart"></canvas>
+            <canvas id="expenseBarChart"></canvas>
             <canvas id="incomeExpenseChart"></canvas>
         </section>
     </main>

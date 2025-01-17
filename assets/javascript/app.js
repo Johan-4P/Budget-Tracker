@@ -28,11 +28,32 @@ const incomeExpenseChart = new Chart(ctx, {
     },
 });
 
+    // Bar Chart for Expense Categories
+    const barCtx = document.getElementById("expenseBarChart").getContext("2d");
+    const expenseBarChart = new Chart(barCtx, {
+        type: "bar",
+        data: {
+            labels: Object.keys(expenseCategories),
+            datasets: [
+                {
+                    label: "Expenses by Category",
+                    data: Object.values(expenseCategories),
+                    backgroundColor: ["#007bff", "#ffc107", "#17a2b8", "#6c757d"],
+                },
+            ],
+        },
+    });
+
 // Update chart function
 function updateChart() {
     incomeExpenseChart.data.datasets[0].data = [totalIncome, totalExpenses];
     incomeExpenseChart.update();
 }
+        // Update Bar Chart
+        expenseBarChart.data.datasets[0].data = Object.values(expenseCategories);
+        expenseBarChart.update();
+
+
 function updateTotals() {
     const balance = totalIncome - totalExpenses;
 
@@ -51,9 +72,14 @@ function updateTotals() {
 addDataButton.addEventListener("click", () => {
     const income = parseFloat(incomeInput.value) || 0;
     const expense = parseFloat(expenseInput.value) || 0;
+    const category = categorySelect.value;
 
     totalIncome += income;
     totalExpenses += expense 
+
+    if (expense > 0) {
+        expenseCategories[category] += expense;
+    }
 
     updateChart();
     updateTotals();
