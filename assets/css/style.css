@@ -11,6 +11,10 @@ body {
     color: gray;
 }
 
+#inputs {
+    display: flex;
+}
+
 #charts-container {
     display: flex;
     justify-content: space-around;
