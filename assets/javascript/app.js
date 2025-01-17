@@ -1,11 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
-    let totalIncome = 0;
-    let totalExpenses = 0;
-    let savingsGoal = 0;
+    let totalIncome = parseFloat(localStorage.getItem("totalIncome")) || 0;
+    let totalExpenses = parseFloat(localStorage.getItem("totalExpenses")) || 0;
+    let savingsGoal = parseFloat(localStorage.getItem("savingsGoal")) || 0;
 
     // Expense Categories
-    const expenseCategories = {};
-    const expenseList = [];
+    const expenseCategories = JSON.parse(localStorage.getItem("expenseCategories")) || {};
+    const expenseList = JSON.parse(localStorage.getItem("expenseList")) || [];
 
     // Elements
     const savedExpenses = JSON.parse(localStorage.getItem("expenses")) || [];
@@ -23,7 +23,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const balanceDisplay = document.getElementById("balance");
     const savingsGoalText = document.getElementById("savings-goal-text");
     const savingsProgressText = document.getElementById("savings-progress-text");
-    localStorage.setItem("expenses", JSON.stringify(expenseList));
+
+    // Load stored totals
+    //totalIncome = parseFloat(localStorage.getItem("totalIncome")) || 0;
+    //totalExpenses = parseFloat(localStorage.getItem("totalExpenses")) || 0;
+    //savingsGoal = parseFloat(localStorage.getItem("savingsGoal")) || 0;
 
     // Pie Chart
     const pieCtx = document.getElementById("incomeExpenseChart").getContext("2d");
@@ -81,6 +85,17 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
             savingsProgressText.innerText = "Savings Progress: 0%";
         }
+    
+
+    // Save totals to localstorage
+    localStorage.setItem("totalIncome", totalIncome);
+    localStorage.setItem("totalExpenses", totalExpenses);
+    }
+
+    // Save Expense list to localstorage
+    function saveExpensesToLocalStorage() {
+        localStorage.setItem("expenseCategories", JSON.stringify(expenseCategories));
+        localStorage.setItem("expenseList", JSON.stringify(expenseList));
     }
 
     // Add Expense to table
@@ -93,6 +108,14 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
         expenseTableBody.prepend(newRow);
         expenseTableBody.appendChild(newRow)
+    }
+
+    // Load data on page load
+    function loadStoredData() {
+        // Load expenses into the table
+        expenseList.forEach(({ category, amount, date}) => {
+            addExpenseToTable(category, amount, date);
+        });
     }
 
     // Event Listener: Add Data
@@ -115,11 +138,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 expenseCategories[category] = 0;
             }
             expenseCategories[category] += expense;
+
+            expenseList.push({ category, amount: expense, date });
+            addExpenseToTable(category, expense, date);
         }
 
-        addExpenseToTable(category, expense, date);
         updateCharts();
         updateTotals();
+        saveExpensesToLocalStorage();
 
         // Clear inputs
         categoryInput.value = "";
@@ -127,6 +153,16 @@ document.addEventListener("DOMContentLoaded", () => {
         expenseInput.value = "";
         dateInput.value = "";
     });
+
+    // Event listener: Delete expense
+    expenseTableBody.addEventListener("click", (e) => {
+        if (e.target.classList.contains("delete-expense")) {
+            const index = parseInt(e.target.getAttribute("data-index"));
+            const { category, amount } = expenseList[index];
+
+            // Update totals and remove from categories
+        }
+    })
 
     // Event Listener: Update Savings Goal
     updateSavingsButton.addEventListener("click", () => {
@@ -138,6 +174,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         savingsGoalText.innerText = `Savings Goal: $${savingsGoal.toFixed(2)}`;
+        localStorage.setItem("savingsGoal", savingsGoal);
         updateTotals();
     });
+
+    // Initialize app
+    loadStoredData();
 });
