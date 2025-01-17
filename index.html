@@ -24,8 +24,8 @@
     </nav>
     <header>
         <h1 class="text-center">Budget Tracker</h1>
-        <section class="container">
-            <div class="card card-1">
+        <section class="card-1">
+            <div>
                 <h3 class="text-center">Welcome</h3>
                 <p class="text-center">
                     Glad that you did find this site, here you can get hold on your
@@ -36,30 +36,24 @@
         </section>
     </header>
     <main>
-        <!-- Currency section -->
-        <section id="currency" class="container">
+        <!-- Form section -->
+        <section id="inputs">
             <label for="currency-select">Choose Currency</label>
             <select id="currency-select">
                 <option value="USD">USD</option>
                 <option value="EUR">EUR</option>
                 <option value="SEK">SEK</option>
             </select>
-        </section>
-
-        <!-- Form section -->
-        <section id="inputs" class="container">
             <form id="budget-form">
                 <label for="category">Enter Category:</label>
-                <input type="text" id="category" placeholder="Category" required> 
+                <input type="text" id="category" placeholder="Category" required>
                 <label for="income">Income:</label>
                 <input type="number" id="income" placeholder="Enter Income" required>
                 <label for="expense">Expense:</label>
                 <input type="number" id="expense" placeholder="Enter Expense" required>
                 <input type="date" id="date" required>
                 <button type="button" id="add-data">Add</button>
-                
             </form>
-            
         </section>
         <!-- Summary section -->
         <div id="summary" class="card container">
@@ -68,10 +62,11 @@
             <p id="balance">Balance: 0</p>
             <p id="savings-goal-text">Savings: 0</p>
             <p id="savings-progress-text">Savings Progress: 0%</p>
+        </div>
+        <div id="savings-section">
             <label for="savingsGoal">Set Savings Goal:</label>
             <input type="number" id="savingsGoal" placeholder="Enter savings goal" required>
             <button type="button" id="update-savings">Set Goal</button>
-            
         </div>
         <!-- Chart section -->
         <div id="charts-container">
@@ -79,7 +74,7 @@
             <canvas id="incomeExpenseChart"></canvas>
         </div>
 
-        <section id="expense-list">
+        <section id="expense-list" class="text-center">
             <h3>Detailed List of Expenses</h3>
             <table id="expense-table">
                 <thead>

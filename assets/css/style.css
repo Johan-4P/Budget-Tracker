@@ -2,6 +2,15 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+.card-1 {
+    border: 2px solid darkslategrey;
+    border-radius: 8px;
+    background-color: #274d92;
+    padding: 20px;
+    margin: 20px 130px 20px;
+    color: gray;
+}
+
 #charts-container {
     display: flex;
     justify-content: space-around;

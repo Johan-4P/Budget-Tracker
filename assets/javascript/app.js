@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const expenseList = [];
 
     // Elements
+    const savedExpenses = JSON.parse(localStorage.getItem("expenses")) || [];
     const categoryInput = document.getElementById("category");
     const incomeInput = document.getElementById("income");
     const expenseInput = document.getElementById("expense");
@@ -22,6 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const balanceDisplay = document.getElementById("balance");
     const savingsGoalText = document.getElementById("savings-goal-text");
     const savingsProgressText = document.getElementById("savings-progress-text");
+    localStorage.setItem("expenses", JSON.stringify(expenseList));
 
     // Pie Chart
     const pieCtx = document.getElementById("incomeExpenseChart").getContext("2d");
