@@ -1,3 +1,15 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
 }
+
+#charts-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px;
+}
+
+canvas {
+    max-width: 45%;
+    max-height: 400px;
+}
