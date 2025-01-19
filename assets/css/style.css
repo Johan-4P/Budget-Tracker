@@ -13,23 +13,23 @@ body {
 
 #inputs {
     display: flex;
-    flex-direction: column;
-    border: 3px solid darkslategray;
-    border-radius: 90px;
+    height: 100%;
+    width: 20%;
     padding: 30px;
+    margin-left: 30%;
 }
 
 #summary {
     display: flex;
     flex-direction: column;
-    border: 3px solid darkslategray;
-    border-radius: 90px;
     padding: 30px;
     margin: 10px 30px 10px;
 }
 .form-section {
     display: flex;
-
+    border: 3px solid darkslategray;
+    border-radius: 50%;
+    background-color: #2275bd;
 }
 
 #charts-container {
@@ -46,17 +46,75 @@ canvas {
 
 /* Media Queries */
 
-/* Extra small devices (phones, 600px and down) 
-@media only screen and (max-width: 600px) {...}*/
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
 
-/* Small devices (portrait tablets and large phones, 600px and up)
-@media only screen and (min-width: 600px) {...} */
+    .card-1 {
+        margin: 20px 25px 20px;
+    }
 
-/* Medium devices (landscape tablets, 768px and up) 
-@media only screen and (min-width: 768px) {...}*/
+    .form-section {
+        font-size: x-small;
+        margin-bottom: 50px;
+        margin-top: 50px;
+    }
+    #inputs {
+        width: 35%;
+        margin-left: 10%;
+    }
 
-/* Large devices (laptops/desktops, 992px and up) 
-@media only screen and (min-width: 992px) {...}*/
+    #charts-container {
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+        margin-bottom: 40px;
+    }
+}
 
-/* Extra large devices (large laptops and desktops, 1200px and up) 
-@media only screen and (min-width: 1200px) {...}*/
+/* Small devices (portrait tablets and large phones, 600px and up)*/
+@media only screen and (min-width: 600px) {
+
+    .card-1 {
+        padding: 10px;
+        margin: 10px 30px 10px;
+    }
+
+    #inputs {
+        width: 40%;
+        padding: 25px;
+        margin-left: 10%;
+    }
+    .form-section {
+        font-size: x-small;
+    }
+} 
+
+/* Medium devices (landscape tablets, 768px and up)*/ 
+@media only screen and (min-width: 768px) {
+    #inputs {
+        width: 25%;
+        margin-left: 25%;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    #inputs {
+        width: 20%;
+        margin-left: 30%;
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    #inputs {
+        width: 15%;
+        margin-left: 35%;
+    }
+    #summary {
+        margin-left: 5%;
+    }
+    .form-section {
+        margin: 0 10%;
+    }
+}
