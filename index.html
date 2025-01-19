@@ -37,7 +37,7 @@
     </header>
     <main>
         <!-- Form section -->
-        <section>
+        <section class="form-section">
             <div id="inputs">
                 <label for="currency-select">Choose Currency</label>
                 <select id="currency-select">
@@ -56,15 +56,16 @@
                     <button type="button" id="add-data">Add</button>
                 </form>
             </div>
-        </section>
+        
         <!-- Summary section -->
-        <div id="summary" class="card container">
-            <p id="total-income">Income: 0</p>
-            <p id="total-expenses">Expense: 0</p>
-            <p id="balance">Balance: 0</p>
-            <p id="savings-goal-text">Savings: 0</p>
-            <p id="savings-progress-text">Savings Progress: 0%</p>
-        </div>
+            <div id="summary">
+                <p id="total-income">Income: 0</p>
+                <p id="total-expenses">Expense: 0</p>
+                <p id="balance">Balance: 0</p>
+                <p id="savings-goal-text">Savings: 0</p>
+                <p id="savings-progress-text">Savings Progress: 0%</p>
+            </div>
+        </section>
         <div id="savings-section">
             <label for="savingsGoal">Set Savings Goal:</label>
             <input type="number" id="savingsGoal" placeholder="Enter savings goal" required>
@@ -92,7 +93,8 @@
             </table>
         </section>
 
-        <section id="reset">
+        <section id="reset" class="text-center">
+            <p>Here you can reset the whole page</p>
             <button type="button" id="resetButton">Reset</button>
         </section>
     </main>
