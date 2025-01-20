@@ -1,52 +1,171 @@
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f5f7fa;
+    color: #333;
+}
+/* Navbar */
+navbar {
+background-color: rgb(75, 81, 169);
+padding: 10px 20px;
+}
+.navbar-brand img {
+    border-radius: 5px;
+}
+/* Header */
+header {
+    background: linear-gradient(90deg, #007bff, #0056b3);
+    padding: 20px 0;
+    text-align: center;
+    color: white;
 }
 
-.card-1 {
-    border: 2px solid darkslategrey;
-    border-radius: 8px;
-    background-color: #274d92;
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+header p {
+    font-size: 1.1rem;
+}
+
+/* Main */
+main {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    margin: 20px 130px 20px;
-    color: gray;
 }
 
+/* Form and Display */
 #inputs {
-    display: flex;
-    height: 100%;
-    width: 20%;
-    padding: 30px;
-    margin-left: 30%;
+    margin-bottom: 30px;
 }
 
+form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+form input, form select, form button {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+form input:focus, form button:hover {
+    border-color: #007bff;
+    outline: none;
+    background-color: #eef6ff;
+}
+form button {
+    background: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+form button:hover {
+    background: #0056b3;
+}
+
+/* Summary */
 #summary {
-    display: flex;
-    flex-direction: column;
-    padding: 30px;
-    margin: 10px 30px 10px;
+    text-align: center;
+    margin-top: 20px;
 }
-.form-section {
-    display: flex;
-    border: 3px solid darkslategray;
-    border-radius: 50%;
-    background-color: #2275bd;
+#summary p {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+#summary .highlight {
+    color: #007bff;
 }
 
+/* Savings */
+#savings-section {
+    margin: 30px 0;
+    text-align: center;
+}
+#savings-section input, #savings-section button {
+    width: auto;
+    padding: 10px;
+    margin-right: 10px;
+    font-size: 1rem;
+}
+
+/* Charts */
 #charts-container {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    gap: 20px;
+    margin-top: 40px;
 }
 
 canvas {
-    max-width: 45%;
-    max-height: 400px;
+    margin: 20px auto;
+    display: block;
+    max-width: 90%;
+    height: auto;
+}
+
+/* Expense List */
+#expense-list {
+    margin: 30px 0;
+    text-align: center;
+}
+#expense-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+#expense-table th,
+#expense-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+#expense-table th {
+    background-color: #007bff;
+    color: white;
+}
+
+#expense-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#expense-table tr:hover {
+    background-color: #eef6ff;
+}
+
+/* Reset Button */
+#reset {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#resetButton {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#resetButton:hover {
+    background-color: #bd2130;
 }
 
 /* Media Queries */
 
-/* Extra small devices (phones, 600px and down) */
+/* Extra small devices (phones, 600px and down) 
 @media only screen and (max-width: 600px) {
 
     .card-1 {
@@ -69,9 +188,9 @@ canvas {
         align-items: center;
         margin-bottom: 40px;
     }
-}
+}*/
 
-/* Small devices (portrait tablets and large phones, 600px and up)*/
+/* Small devices (portrait tablets and large phones, 600px and up)
 @media only screen and (min-width: 600px) {
 
     .card-1 {
@@ -87,25 +206,25 @@ canvas {
     .form-section {
         font-size: x-small;
     }
-} 
+} */
 
-/* Medium devices (landscape tablets, 768px and up)*/ 
+/* Medium devices (landscape tablets, 768px and up) 
 @media only screen and (min-width: 768px) {
     #inputs {
         width: 25%;
         margin-left: 25%;
     }
-}
+}*/
 
-/* Large devices (laptops/desktops, 992px and up) */
+/* Large devices (laptops/desktops, 992px and up) 
 @media only screen and (min-width: 992px) {
     #inputs {
         width: 20%;
         margin-left: 30%;
     }
-}
+}*/
 
-/* Extra large devices (large laptops and desktops, 1200px and up) */
+/* Extra large devices (large laptops and desktops, 1200px and up)
 @media only screen and (min-width: 1200px) {
     .card-1 {
         margin: 10px 300px 10px;
@@ -121,4 +240,4 @@ canvas {
     .form-section {
         margin: 0 25%;
     }
-}
+} */

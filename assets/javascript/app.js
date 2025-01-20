@@ -43,18 +43,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function updateTotals() {
         const balance = totalIncome - totalExpenses;
-
+    
         totalIncomeDisplay.innerText = `Total Income: ${totalIncome.toFixed(2)}`;
         totalExpensesDisplay.innerText = `Total Expenses: ${totalExpenses.toFixed(2)}`;
         balanceDisplay.innerText = `Balance: ${balance.toFixed(2)}`;
-
+    
         if (savingsGoal > 0) {
             const progress = (balance / savingsGoal) * 100;
+            savingsGoalText.innerText = `Savings Goal: ${savingsGoal.toFixed(2)}`;
             savingsProgressText.innerText = `Savings Progress: ${progress.toFixed(2)}%`;
         } else {
+            savingsGoalText.innerText = "Savings Goal: 0";
             savingsProgressText.innerText = "Savings Progress: 0%";
         }
-
+    
         localStorage.setItem("totalIncome", totalIncome);
         localStorage.setItem("totalExpenses", totalExpenses);
     }
