@@ -4,6 +4,14 @@ document.addEventListener("DOMContentLoaded", () => {
     let savingsGoal = parseFloat(localStorage.getItem("savingsGoal")) || 0;
 
     const expenseList = JSON.parse(localStorage.getItem("expenseList")) || [];
+    const expenseCategories = (() => {
+        try {
+            return JSON.parse(localStorage.getItem("expenseCategories")) || {};
+        } catch {
+            return {};
+        }
+    })();
+
     const categoryInput = document.getElementById("category");
     const incomeInput = document.getElementById("income");
     const expenseInput = document.getElementById("expense");
@@ -20,34 +28,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const savingsGoalText = document.getElementById("savings-goal-text");
     const savingsProgressText = document.getElementById("savings-progress-text");
 
-    const pieCtx = document.getElementById("incomeExpenseChart").getContext("2d");
-    const incomeExpenseChart = new Chart(pieCtx, {
-        type: "pie",
-        data: { labels: ["Income", "Expenses"], datasets: [{ data: [0, 0], backgroundColor: ["#28a745", "#dc3545"] }] },
-    });
+    let pieChartInstance, barChartInstance;
 
-    const barCtx = document.getElementById("expenseBarChart").getContext("2d");
-    const expenseBarChart = new Chart(barCtx, {
-        type: "bar",
-        data: { labels: [], datasets: [{ label: "Expenses by Category", data: [], backgroundColor: ["#007bff", "#ffc107", "#17a2b8", "#6c757d"] }] },
-    });
-
-    function updateCharts() {
-        incomeExpenseChart.data.datasets[0].data = [totalIncome, totalExpenses];
-        incomeExpenseChart.update();
-
-        expenseBarChart.data.labels = Object.keys(expenseCategories);
-        expenseBarChart.data.datasets[0].data = Object.values(expenseCategories);
-        expenseBarChart.update();
-    }
-
+    // Update totals
     function updateTotals() {
         const balance = totalIncome - totalExpenses;
-    
+
         totalIncomeDisplay.innerText = `Total Income: ${totalIncome.toFixed(2)}`;
         totalExpensesDisplay.innerText = `Total Expenses: ${totalExpenses.toFixed(2)}`;
         balanceDisplay.innerText = `Balance: ${balance.toFixed(2)}`;
-    
+
         if (savingsGoal > 0) {
             const progress = (balance / savingsGoal) * 100;
             savingsGoalText.innerText = `Savings Goal: ${savingsGoal.toFixed(2)}`;
@@ -56,16 +46,18 @@ document.addEventListener("DOMContentLoaded", () => {
             savingsGoalText.innerText = "Savings Goal: 0";
             savingsProgressText.innerText = "Savings Progress: 0%";
         }
-    
+
         localStorage.setItem("totalIncome", totalIncome);
         localStorage.setItem("totalExpenses", totalExpenses);
     }
 
+    // Save expenses localStorage
     function saveExpensesToLocalStorage() {
         localStorage.setItem("expenseCategories", JSON.stringify(expenseCategories));
         localStorage.setItem("expenseList", JSON.stringify(expenseList));
     }
 
+    // Add expenses to localstorage
     function addExpenseToTable(category, amount, date) {
         const newRow = document.createElement("tr");
         const index = expenseList.length - 1;
@@ -84,6 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
         expenseTableBody.appendChild(newRow);
     }
 
+    // Delete expenses
     function deleteExpense(index) {
         const { category, amount } = expenseList[index];
         totalExpenses -= amount;
@@ -96,57 +89,138 @@ document.addEventListener("DOMContentLoaded", () => {
         expenseList.splice(index, 1);
         saveExpensesToLocalStorage();
 
+        renderExpenseTable();
+        updateCharts();
+        updateTotals();
+    }
+
+    function renderExpenseTable() {
         expenseTableBody.innerHTML = "";
         expenseList.forEach((expense, i) => {
             addExpenseToTable(expense.category, expense.amount, expense.date);
             const lastRow = expenseTableBody.lastElementChild;
             lastRow.querySelector(".delete-expense").setAttribute("data-index", i);
         });
-
-        updateCharts();
-        updateTotals();
     }
 
-    function loadStoredData() {
-        expenseList.forEach(({ category, amount, date }) => {
-            addExpenseToTable(category, amount, date);
-        });
+    // Update charts
+    function updateCharts() {
+        const income = expenseList.filter(t => t.amount > 0).reduce((sum, t) => sum + t.amount, 0);
+        const expenses = expenseList.filter(t => t.amount < 0).reduce((sum, t) => sum + Math.abs(t.amount), 0);
+        const categories = expenseList.reduce((acc, t) => {
+            acc[t.category] = (acc[t.category] || 0) + Math.abs(t.amount);
+            return acc;
+        }, {});
+
+        updatePieChart(categories);
+        updateBarChart(income, expenses);
     }
 
-    addDataButton.addEventListener("click", () => {
-        const category = categoryInput.value.trim();
-        const income = parseFloat(incomeInput.value) || 0;
-        const expense = parseFloat(expenseInput.value) || 0;
-        const date = dateInput.value;
-
-        if (!category || (!income && !expense) || !date) {
-            alert("Please fill in all fields.");
+   
+    function updatePieChart(categories) {
+        const canvas = document.getElementById('pieChart');
+        if (!canvas) {
+            console.error("Canvas element for Pie Chart not found.");
             return;
         }
-
-        totalIncome += income;
-        totalExpenses += expense;
-
-        if (expense > 0) {
-            if (!expenseCategories[category]) {
-                expenseCategories[category] = 0;
+    
+        if (pieChartInstance) pieChartInstance.destroy();
+        const ctx = canvas.getContext('2d');
+        pieChartInstance = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: Object.keys(categories),
+                datasets: [{
+                    data: Object.values(categories),
+                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4CAF50', '#F44336']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
             }
-            expenseCategories[category] += expense;
+        });
+    }
+    
 
-            expenseList.push({ category, amount: expense, date });
-            addExpenseToTable(category, expense, date);
+   
+    function updateBarChart(income, expenses) {
+        const canvas = document.getElementById('barChart');
+        if (!canvas) {
+            console.error("Canvas element for Bar Chart not found.");
+            return;
         }
+    
+        if (barChartInstance) barChartInstance.destroy();
+        const ctx = canvas.getContext('2d');
+        barChartInstance = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Income', 'Expenses'],
+                datasets: [{
+                    data: [income, expenses],
+                    backgroundColor: ['#4CAF50', '#F44336']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+    }
+    
 
-        updateCharts();
-        updateTotals();
-        saveExpensesToLocalStorage();
-
-        categoryInput.value = "";
-        incomeInput.value = "";
-        expenseInput.value = "";
-        dateInput.value = "";
+// Load stored data
+function loadStoredData() {
+    expenseList.forEach(({ category, amount, date }) => {
+        addExpenseToTable(category, amount, date);
+        if (amount > 0) totalIncome += amount;
+        else totalExpenses += Math.abs(amount);
     });
+    updateCharts(); // Ensure charts are updated after loading data
+}
 
+// Add data
+addDataButton.addEventListener("click", () => {
+    const category = categoryInput.value.trim();
+    const income = parseFloat(incomeInput.value) || 0;
+    const expense = parseFloat(expenseInput.value) || 0;
+    const date = dateInput.value;
+
+    if (!category || (!income && !expense) || !date) {
+        alert("Please fill in all fields.");
+        return;
+    }
+
+    if (income && expense) {
+        alert("Please enter either income or expense, not both.");
+        return;
+    }
+
+    totalIncome += income;
+    totalExpenses += expense;
+
+    if (expense > 0) {
+        if (!expenseCategories[category]) {
+            expenseCategories[category] = 0;
+        }
+        expenseCategories[category] += expense;
+
+        expenseList.push({ category, amount: expense, date });
+        addExpenseToTable(category, expense, date);
+    }
+
+    updateCharts();
+    updateTotals();
+    saveExpensesToLocalStorage();
+
+    categoryInput.value = "";
+    incomeInput.value = "";
+    expenseInput.value = "";
+    dateInput.value = "";
+});
+
+    // Update savings
     updateSavingsButton.addEventListener("click", () => {
         savingsGoal = parseFloat(savingsGoalInput.value) || 0;
 
@@ -155,11 +229,13 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
+        savingsGoalInput.value = "";
         savingsGoalText.innerText = `Savings Goal: $${savingsGoal.toFixed(2)}`;
         localStorage.setItem("savingsGoal", savingsGoal);
         updateTotals();
     });
 
+    // Restore data
     resetButton.addEventListener("click", () => {
         if (confirm("Are you sure you want to reset all data?")) {
             totalIncome = 0;
@@ -169,7 +245,7 @@ document.addEventListener("DOMContentLoaded", () => {
             Object.keys(expenseCategories).forEach((key) => delete expenseCategories[key]);
 
             localStorage.clear();
-            expenseTableBody.innerHTML = "";
+            renderExpenseTable();
             updateCharts();
             updateTotals();
             savingsGoalText.innerText = "Savings Goal: $0";
@@ -177,13 +253,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    const expenseCategories = (() => {
-        try {
-            return JSON.parse(localStorage.getItem("expenseCategories")) || {};
-        } catch {
-            return {};
-        }
-    })();
-
     loadStoredData();
+    updateTotals();
+    updateCharts(); // Ensure charts are updated after DOM content is loaded
 });
+
