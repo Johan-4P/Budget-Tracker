@@ -3,9 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let totalExpenses = parseFloat(localStorage.getItem("totalExpenses")) || 0;
     let savingsGoal = parseFloat(localStorage.getItem("savingsGoal")) || 0;
 
-    const expenseCategories = JSON.parse(localStorage.getItem("expenseCategories")) || {};
     const expenseList = JSON.parse(localStorage.getItem("expenseList")) || [];
-
     const categoryInput = document.getElementById("category");
     const incomeInput = document.getElementById("income");
     const expenseInput = document.getElementById("expense");
@@ -176,6 +174,14 @@ document.addEventListener("DOMContentLoaded", () => {
             savingsProgressText.innerText = "Savings Progress: 0%";
         }
     });
+
+    const expenseCategories = (() => {
+        try {
+            return JSON.parse(localStorage.getItem("expenseCategories")) || {};
+        } catch {
+            return {};
+        }
+    })();
 
     loadStoredData();
 });
