@@ -105,24 +105,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Update charts
     function updateCharts() {
-        const income = expenseList.filter(t => t.amount > 0).reduce((sum, t) => sum + t.amount, 0);
-        const expenses = expenseList.filter(t => t.amount < 0).reduce((sum, t) => sum + Math.abs(t.amount), 0);
-        const categories = expenseList.reduce((acc, t) => {
-            acc[t.category] = (acc[t.category] || 0) + Math.abs(t.amount);
-            return acc;
-        }, {});
-
-        updatePieChart(categories);
+        const income = expenseList
+            .filter(item => item.amount > 0)
+            .reduce((sum, item) => sum + item.amount, 0);
+    
+        const expenses = expenseList
+            .filter(item => item.amount < 0) 
+            .reduce((sum, item) => sum + Math.abs(item.amount), 0);
+    
         updateBarChart(income, expenses);
+        updatePieChart(expenseCategories);
     }
+    
 
    
     function updatePieChart(categories) {
         const canvas = document.getElementById('pieChart');
-        if (!canvas) {
-            console.error("Canvas element for Pie Chart not found.");
-            return;
-        }
     
         if (pieChartInstance) pieChartInstance.destroy();
         const ctx = canvas.getContext('2d');
@@ -146,11 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
    
     function updateBarChart(income, expenses) {
         const canvas = document.getElementById('barChart');
-        if (!canvas) {
-            console.error("Canvas element for Bar Chart not found.");
-            return;
-        }
-    
+
         if (barChartInstance) barChartInstance.destroy();
         const ctx = canvas.getContext('2d');
         barChartInstance = new Chart(ctx, {
@@ -192,24 +186,22 @@ addDataButton.addEventListener("click", () => {
         return;
     }
 
-    if (income && expense) {
-        alert("Please enter either income or expense, not both.");
-        return;
-    }
-
-    totalIncome += income;
-    totalExpenses += expense;
-
-    if (expense > 0) {
+    if (income > 0) {
+        totalIncome += income;
+        expenseList.push({ category, amount: income, date }); 
+    } else if (expense > 0) {
+        totalExpenses += expense;
         if (!expenseCategories[category]) {
             expenseCategories[category] = 0;
         }
         expenseCategories[category] += expense;
-
-        expenseList.push({ category, amount: expense, date });
-        addExpenseToTable(category, expense, date);
+        expenseList.push({ category, amount: -expense, date });
+    } else {
+        alert("Please enter a valid income or expense.");
+        return;
     }
 
+    addExpenseToTable(category, income > 0 ? income : -expense, date);
     updateCharts();
     updateTotals();
     saveExpensesToLocalStorage();
@@ -219,6 +211,7 @@ addDataButton.addEventListener("click", () => {
     expenseInput.value = "";
     dateInput.value = "";
 });
+
 
     // Update savings
     updateSavingsButton.addEventListener("click", () => {
