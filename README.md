@@ -1,13 +1,11 @@
-# Mysterious Things - Project Portfolio 1 - HTML & CSS 
+# Budget Tracker - Project Portfolio 2 - HTML, CSS and JavaScript. 
 
-Mysterious Things is a website designed to offer deep insights into the spiritual and mystical realms.
-It serves as a guide for anyone interested in exploring Tarot cards, Runes, and Oracle readings.
-The platform also features a dedicated question page to address users curiosities about these esoteric practices.
+Budget Tracker is a website there you can go to if you want to get hold on your economy. There you can insert numbers and the site will calculate the numbers for you!
 
 ![a mockup of the homepage](assets/images/mockup.png "Homepage!")
 
 
-Visit the deployed site: [Mysterious Things](https://johan-4p.github.io/Mysterious-Things/index.html)
+Visit the deployed site: [Budget Tracker](https://johan-4p.github.io/Budget-Tracker/)
 
 
 # CONTENTS

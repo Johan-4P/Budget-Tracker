@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let totalExpenses = parseFloat(localStorage.getItem("totalExpenses")) || 0;
     let savingsGoal = parseFloat(localStorage.getItem("savingsGoal")) || 0;
 
+
     const expenseList = JSON.parse(localStorage.getItem("expenseList")) || [];
     const expenseCategories = (() => {
         try {
@@ -166,10 +167,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Load stored data
 function loadStoredData() {
+    expenseTableBody.innerHTML = "";
     expenseList.forEach(({ category, amount, date }) => {
         addExpenseToTable(category, amount, date);
-        if (amount > 0) totalIncome += amount;
-        else totalExpenses += Math.abs(amount);
     });
     updateCharts(); // Ensure charts are updated after loading data
 }
