@@ -80,20 +80,26 @@ document.addEventListener("DOMContentLoaded", () => {
     // Delete expenses
     function deleteExpense(index) {
         const { category, amount } = expenseList[index];
-        totalExpenses -= Math.abs(amount);
-        expenseCategories[category] -= Math.abs(amount);
-
-        if (expenseCategories[category] <= 0) {
-            delete expenseCategories[category];
+    
+        if (amount > 0) {
+            totalIncome -= amount;
+        } else {
+            totalExpenses -= Math.abs(amount);
+            expenseCategories[category] -= Math.abs(amount);
+    
+            if (expenseCategories[category] <= 0) {
+                delete expenseCategories[category];
+            }
         }
-
+    
         expenseList.splice(index, 1);
         saveExpensesToLocalStorage();
-
+    
         renderExpenseTable();
         updateCharts();
         updateTotals();
     }
+    
 
     function renderExpenseTable() {
         expenseTableBody.innerHTML = "";
@@ -167,12 +173,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Load stored data
 function loadStoredData() {
+    // Render expenses into the table without altering totals
     expenseList.forEach(({ category, amount, date }) => {
         addExpenseToTable(category, amount, date);
-        if (amount > 0) totalIncome += amount;
-        else totalExpenses += Math.abs(amount);
     });
-    updateCharts(); // Ensure charts are updated after loading data
+
+    // Use stored totals directly to avoid recalculating them
+    totalIncome = parseFloat(localStorage.getItem("totalIncome")) || 0;
+    totalExpenses = parseFloat(localStorage.getItem("totalExpenses")) || 0;
+
+    updateCharts();
+    updateTotals();
 }
 
 // Add data
