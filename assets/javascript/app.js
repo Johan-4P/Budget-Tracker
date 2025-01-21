@@ -30,6 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let pieChartInstance, barChartInstance;
 
+    // Update totals
     function updateTotals() {
         const balance = totalIncome - totalExpenses;
 
@@ -50,11 +51,13 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem("totalExpenses", totalExpenses);
     }
 
+    // Save expenses to localStorage
     function saveExpensesToLocalStorage() {
         localStorage.setItem("expenseCategories", JSON.stringify(expenseCategories));
         localStorage.setItem("expenseList", JSON.stringify(expenseList));
     }
 
+    // Add expenses to table
     function addExpenseToTable(category, amount, date) {
         const newRow = document.createElement("tr");
         const index = expenseList.length - 1;
@@ -66,13 +69,15 @@ document.addEventListener("DOMContentLoaded", () => {
             <td><button class="delete-expense" data-index="${index}">Delete</button></td>
         `;
 
-        newRow.querySelector(".delete-expense").addEventListener("click", () => {
-            deleteExpense(index);
+        newRow.querySelector(".delete-expense").addEventListener("click", (event) => {
+            const rowIndex = parseInt(event.target.getAttribute("data-index"), 10);
+            deleteExpense(rowIndex);
         });
 
         expenseTableBody.appendChild(newRow);
     }
 
+    // Delete expenses
     function deleteExpense(index) {
         const { category, amount } = expenseList[index];
         totalExpenses -= Math.abs(amount);
@@ -99,9 +104,25 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // Update charts
+    function updateCharts() {
+        const income = expenseList
+            .filter(item => item.amount > 0)
+            .reduce((sum, item) => sum + item.amount, 0);
+    
+        const expenses = expenseList
+            .filter(item => item.amount < 0) 
+            .reduce((sum, item) => sum + Math.abs(item.amount), 0);
+    
+        updateBarChart(income, expenses);
+        updatePieChart(expenseCategories);
+    }
+    
+
+   
     function updatePieChart(categories) {
         const canvas = document.getElementById('pieChart');
-
+    
         if (pieChartInstance) pieChartInstance.destroy();
         const ctx = canvas.getContext('2d');
         pieChartInstance = new Chart(ctx, {
@@ -119,7 +140,9 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+    
 
+   
     function updateBarChart(income, expenses) {
         const canvas = document.getElementById('barChart');
 
@@ -140,67 +163,58 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+    
 
-    function updateCharts() {
-        const income = expenseList
-            .filter(item => item.amount > 0)
-            .reduce((sum, item) => sum + item.amount, 0);
-
-        const expenses = expenseList
-            .filter(item => item.amount < 0)
-            .reduce((sum, item) => sum + Math.abs(item.amount), 0);
-
-        updateBarChart(income, expenses);
-        updatePieChart(expenseCategories);
-    }
-
-    function loadStoredData() {
-        console.log("Loading stored data...");
-        expenseTableBody.innerHTML = "";
-        expenseList.forEach(({ category, amount, date }) => {
-            addExpenseToTable(category, amount, date);
-        });
-
-        updateCharts();
-    }
-
-    addDataButton.addEventListener("click", () => {
-        const category = categoryInput.value.trim();
-        const income = parseFloat(incomeInput.value) || 0;
-        const expense = parseFloat(expenseInput.value) || 0;
-        const date = dateInput.value;
-
-        if (!category || (!income && !expense) || !date) {
-            alert("Please fill in all fields.");
-            return;
-        }
-
-        if (income > 0) {
-            totalIncome += income;
-            expenseList.push({ category, amount: income, date }); 
-        } else if (expense > 0) {
-            totalExpenses += expense;
-            if (!expenseCategories[category]) {
-                expenseCategories[category] = 0;
-            }
-            expenseCategories[category] += expense;
-            expenseList.push({ category, amount: -expense, date });
-        } else {
-            alert("Please enter a valid income or expense.");
-            return;
-        }
-
-        addExpenseToTable(category, income > 0 ? income : -expense, date);
-        updateCharts();
-        updateTotals();
-        saveExpensesToLocalStorage();
-
-        categoryInput.value = "";
-        incomeInput.value = "";
-        expenseInput.value = "";
-        dateInput.value = "";
+// Load stored data
+function loadStoredData() {
+    expenseList.forEach(({ category, amount, date }) => {
+        addExpenseToTable(category, amount, date);
+        if (amount > 0) totalIncome += amount;
+        else totalExpenses += Math.abs(amount);
     });
+    updateCharts(); // Ensure charts are updated after loading data
+}
 
+// Add data
+addDataButton.addEventListener("click", () => {
+    const category = categoryInput.value.trim();
+    const income = parseFloat(incomeInput.value) || 0;
+    const expense = parseFloat(expenseInput.value) || 0;
+    const date = dateInput.value;
+
+    if (!category || (!income && !expense) || !date) {
+        alert("Please fill in all fields.");
+        return;
+    }
+
+    if (income > 0) {
+        totalIncome += income;
+        expenseList.push({ category, amount: income, date }); 
+    } else if (expense > 0) {
+        totalExpenses += expense;
+        if (!expenseCategories[category]) {
+            expenseCategories[category] = 0;
+        }
+        expenseCategories[category] += expense;
+        expenseList.push({ category, amount: -expense, date });
+    } else {
+        alert("Please enter a valid income or expense.");
+        return;
+    }
+
+    addExpenseToTable(category, income > 0 ? income : -expense, date);
+    updateCharts();
+    updateTotals();
+    saveExpensesToLocalStorage();
+
+    categoryInput.value = "";
+    incomeInput.value = "";
+    expenseInput.value = "";
+    dateInput.value = "";
+});
+
+
+    // Update savings
     updateSavingsButton.addEventListener("click", () => {
         savingsGoal = parseFloat(savingsGoalInput.value) || 0;
 
@@ -215,6 +229,7 @@ document.addEventListener("DOMContentLoaded", () => {
         updateTotals();
     });
 
+    // Restore data
     resetButton.addEventListener("click", () => {
         if (confirm("Are you sure you want to reset all data?")) {
             totalIncome = 0;
@@ -234,5 +249,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
     loadStoredData();
     updateTotals();
-    updateCharts();
+    updateCharts(); // Ensure charts are updated after DOM content is loaded
 });
