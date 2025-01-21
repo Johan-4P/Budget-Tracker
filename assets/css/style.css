@@ -1,12 +1,13 @@
 body {
     margin: 0;
     font-family: 'Roboto', sans-serif;
-    background-color: #f5f7fa;
+    background-color: #1e3474;
     color: #333;
 }
 /* Navbar */
 navbar {
 background-color: rgb(75, 81, 169);
+color: white;
 padding: 10px 20px;
 }
 .navbar-brand img {
@@ -169,12 +170,12 @@ canvas {
 }
 
 /* Reset Button */
-#reset {
+#reset-box {
     margin-top: 20px;
     text-align: center;
 }
 
-#resetButton {
+#reset {
     background-color: #dc3545;
     color: white;
     border: none;
@@ -182,87 +183,34 @@ canvas {
     font-size: 1rem;
     cursor: pointer;
     border-radius: 5px;
+    
 }
 
-#resetButton:hover {
+#reset:hover {
     background-color: #bd2130;
 }
 
 /* Media Queries */
 
-/* Extra small devices (phones, 600px and down) 
+/* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
-
-    .card-1 {
-        margin: 20px 25px 20px;
-    }
-
-    .form-section {
-        font-size: x-small;
-        margin-bottom: 50px;
-        margin-top: 50px;
-    }
-    #inputs {
-        width: 35%;
-        margin-left: 10%;
-    }
-
     #charts-container {
-        display: flex;
         flex-direction: column-reverse;
-        align-items: center;
-        margin-bottom: 40px;
     }
-}*/
+}
 
 /* Small devices (portrait tablets and large phones, 600px and up)
 @media only screen and (min-width: 600px) {
-
-    .card-1 {
-        padding: 10px;
-        margin: 10px 30px 10px;
-    }
-
-    #inputs {
-        width: 40%;
-        padding: 25px;
-        margin-left: 10%;
-    }
-    .form-section {
-        font-size: x-small;
-    }
 } */
 
 /* Medium devices (landscape tablets, 768px and up) 
 @media only screen and (min-width: 768px) {
-    #inputs {
-        width: 25%;
-        margin-left: 25%;
-    }
 }*/
 
 /* Large devices (laptops/desktops, 992px and up) 
 @media only screen and (min-width: 992px) {
-    #inputs {
-        width: 20%;
-        margin-left: 30%;
-    }
 }*/
 
 /* Extra large devices (large laptops and desktops, 1200px and up)
 @media only screen and (min-width: 1200px) {
-    .card-1 {
-        margin: 10px 300px 10px;
-}
-
-    #inputs {
-        width: 15%;
-        margin-left: 35%;
-    }
-    #summary {
-        margin-left: 5%;
-    }
-    .form-section {
-        margin: 0 25%;
-    }
 } */
