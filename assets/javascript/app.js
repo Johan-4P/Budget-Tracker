@@ -13,8 +13,21 @@ document.addEventListener("DOMContentLoaded", () => {
     })();
 
     const categoryInput = document.getElementById("category");
-    const incomeInput = document.getElementById("income");
-    const expenseInput = document.getElementById("expense");
+    categoryInput.addEventListener("change", () => {
+        const otherInput = document.getElementById("category-other");
+        if (categoryInput.value === "other") {
+            otherInput.style.display = "block";
+            otherInput.required = true;
+        } else {
+            otherInput.style.display = "none";
+            otherInput.required = false;
+            otherInput.value = "";
+        }
+    });
+    
+
+    const amountInput = document.getElementById("amount");
+    const typeInput = document.getElementById("type");
     const dateInput = document.getElementById("date");
     const addDataButton = document.getElementById("add-data");
     const savingsGoalInput = document.getElementById("savingsGoal");
@@ -80,26 +93,25 @@ document.addEventListener("DOMContentLoaded", () => {
     // Delete expenses
     function deleteExpense(index) {
         const { category, amount } = expenseList[index];
-    
+
         if (amount > 0) {
             totalIncome -= amount;
         } else {
             totalExpenses -= Math.abs(amount);
             expenseCategories[category] -= Math.abs(amount);
-    
+
             if (expenseCategories[category] <= 0) {
                 delete expenseCategories[category];
             }
         }
-    
+
         expenseList.splice(index, 1);
         saveExpensesToLocalStorage();
-    
+
         renderExpenseTable();
         updateCharts();
         updateTotals();
     }
-    
 
     function renderExpenseTable() {
         expenseTableBody.innerHTML = "";
@@ -188,41 +200,48 @@ function loadStoredData() {
 
 // Add data
 addDataButton.addEventListener("click", () => {
-    const category = categoryInput.value.trim();
-    const income = parseFloat(incomeInput.value) || 0;
-    const expense = parseFloat(expenseInput.value) || 0;
+    let category = categoryInput.value;
+    const otherInput = document.getElementById("category-other");
+
+    if (category === "other") {
+        category = otherInput.value.trim();
+    }
+
+    const amount = parseFloat(amountInput.value) || 0;
+    const type = typeInput.value;
     const date = dateInput.value;
 
-    if (!category || (!income && !expense) || !date) {
+    if (!category || !amount || !date) {
         alert("Please fill in all fields.");
         return;
     }
 
-    if (income > 0) {
-        totalIncome += income;
-        expenseList.push({ category, amount: income, date }); 
-    } else if (expense > 0) {
-        totalExpenses += expense;
+    if (type === "income") {
+        totalIncome += amount;
+        expenseList.push({ category, amount, date });
+    } else if (type === "expense") {
+        totalExpenses += amount;
         if (!expenseCategories[category]) {
             expenseCategories[category] = 0;
         }
-        expenseCategories[category] += expense;
-        expenseList.push({ category, amount: -expense, date });
-    } else {
-        alert("Please enter a valid income or expense.");
-        return;
+        expenseCategories[category] += amount;
+        expenseList.push({ category, amount: -amount, date });
     }
 
-    addExpenseToTable(category, income > 0 ? income : -expense, date);
+    addExpenseToTable(category, type === "income" ? amount : -amount, date);
     updateCharts();
     updateTotals();
     saveExpensesToLocalStorage();
 
-    categoryInput.value = "";
-    incomeInput.value = "";
-    expenseInput.value = "";
+
+    amountInput.value = "";
     dateInput.value = "";
+    typeInput.value = "income";
+    categoryInput.value = "";
+    otherInput.value = "";
+    otherInput.style.display = "none";
 });
+
 
 
     // Update savings
