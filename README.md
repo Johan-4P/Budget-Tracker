@@ -2,7 +2,7 @@
 
 Budget Tracker is a website there you can go to if you want to get hold on your economy. There you can insert numbers and the site will calculate the numbers for you!
 
-![a mockup of the homepage](assets/images/mockup.png "Homepage!")
+![a mockup of the homepage](assets/images/mockup1.png)
 
 
 Visit the deployed site: [Budget Tracker](https://johan-4p.github.io/Budget-Tracker/)
