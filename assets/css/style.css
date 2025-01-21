@@ -213,6 +213,9 @@ canvas {
     #charts-container {
         flex-direction: column-reverse;
     }
+    #summary {
+        margin: 10px 10px 20px;
+    }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up)
