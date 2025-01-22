@@ -38,7 +38,19 @@
     <main>
         <!-- Form section -->
         <section class="form-section">
+            <div id="information">
+                <h2>Information</h2>
+                <p>
+                    This is a budget tracker where you can enter your income and expenses.
+                    It will calculate your total income, total expenses, and balance.
+                    You can also set a savings goal and track your progress. You can also
+                    set budget goals for different categories and track your progress.
+                </p>
+
+            </div>
+            
             <div id="inputs">
+                <h2>Enter your budget data</h2>
                 <form id="budget-form">
                     <label for="amount">Enter Amount</label>
                     <input type="number" id="amount" placeholder="Amount" required>
@@ -73,16 +85,17 @@
                     <button type="button" id="add-data">Add</button>
                 </form>
             </div>
-        
+        </section>
         <!-- Summary section -->
             <div id="summary">
+                <h2>Summary</h2>
                 <p id="total-income">Income: 0</p>
                 <p id="total-expenses">Expense: 0</p>
                 <p id="balance">Balance: 0</p>
                 <p id="savings-goal-text">Savings: 0</p>
                 <p id="savings-progress-text">Savings Progress: 0%</p>
             </div>
-        </section>
+        
         <div id="savings-section">
             <label for="savingsGoal">Set Savings Goal:</label>
             <input type="number" id="savingsGoal" placeholder="Enter savings goal" required>
@@ -112,7 +125,7 @@
             <button type="button" id="save-budget">Save Goal</button>
         </section>
 
-        <section id="budget-goals-display">
+        <section id="budget-goals-display" class="text-center">
             <h2>Budget Goals Overview</h2>
             <ul id="budget-goals-list"></ul>
         </section>
@@ -124,7 +137,7 @@
         </div>
 
         <section id="expense-list" class="text-center">
-            <h3>Detailed List of Expenses</h3>
+            <h3>Detailed List of Income and Expenses</h3>
             <table id="expense-table">
                 <thead>
                     <tr>
