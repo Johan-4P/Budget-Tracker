@@ -15,7 +15,6 @@ Visit the deployed site: [Budget Tracker](https://johan-4p.github.io/Budget-Trac
 * [Design](#design)
     * [Color Scheme](#color-scheme)
     * [Typography](#typography)
-    * [Images](#images)
     * [Wireframe](#wireframe) 
     * [Features](#features)
         * [The Home Page](#the-home-page)
@@ -43,68 +42,52 @@ Visit the deployed site: [Budget Tracker](https://johan-4p.github.io/Budget-Trac
 
 #### User Stories
 
-* As a visitor, I want to see an attractive homepage, so I can easily navigate to the Tarot, Runes, Oracle, and Question sections.
-* As a visitor, I want the website to have a mystical theme, so I feel immersed in the experience.
-* As a visitor, I want to fill out a question form, so I can submit my thoughts.
+* As a user, i want to input my income and expenses so i can track my financial situation.
+* As a user, i want to set budget goals for different categories so that i can plan my spending.
+* As a user, i want to see a summary of my financial data in charts so that i can easily understand my financial situation.
 
 #### Site Aims
-* I want to be able to take a closer look on each card or rune.
+* I wish to create a site that the users wish to come back to.
 #### Frequent Visitor Goals
-* Able to find out new things about the different sides.
-* I can send a question to find out more if i want to.
+* Easily see and integrate with numbers.
+* That you can continue to follow your budget and savings goals and keep track on them.
 
 ---
 ## Design
 
 ### Color Scheme 
-I have chose the color based on the mystical theme that the page is build on.
+I have choose the color based on that fact that i want it to be an clean site
 
 In my css file i have mostly used variables to declare color, and used these throughout the css file.
 Its useful to use the same color code if you wish to alter the color on the webpage.
-* I have used #d13333 & #ecbdbd as the primary and secondary color used for the sites text.
-* I have used gradient-bg: linear-gradient
-    90deg,
-    rgba(101, 43, 76, 1) 51%,
-    rgba(2, 0, 36, 1) 100%,
-    rgba(0, 212, 255, 1) 100%
-as the background-color.
-* I have used background-color: #01060a as background-color.
-* I have used #d13333 as the border color.
+* For the most i have used a linear-gradient(90deg, #007bff, #0056b3); As a background-color
+* for the navbar i used : #1e3474;
+* And for the text i choose color: white;
 
 ![color-scheme](assets/images/color-scheme.png)
 ### Typography
-Google Fonts was used to import the chosen fonts for the site.
-* For almost all text i used the google font [Delius](https://fonts.google.com/specimen/Delius?preview.text=Mysterious%20Things)
+For this project i choose to use the font-family: 'Roboto', sans-serif;
 
-![Delius](assets/images/delius.png)
-
-* For the big texts i used [Nosifer](https://fonts.google.com/specimen/Nosifer?preview.text=Mysterious%20Things)
-
-![Nosifer](assets/images/nosifer.png)
-
-### Images
-* As the website is called Mysterious Things, i wanted to use a page background of a tarot card that give the user a mysterious feeling.
 ### Wireframe 
 Wireframes were created for mobile, tablet and laptops using balsamiq.
 
-![Homepage](assets/images/index.png)
-![Tarot,rune,oracle](assets/images/tarot.rune.oracle.png)
-![Question](assets/images/question.png)
+![Homepage](assets/images/balsamiq-wired-frames.png)
 
 
 ### Features 
-The website build with a home page, a tarot page, a rune page, a oracle page and a question page.
-All pages on the website are responsive and have:
+The website build with one page
+The website are responsive and have:
 * A favicon in the browser tab.
 
- ![Logo](assets/images/logo.png)
+ ![Logo](assets/favicon/android-chrome-512x512.png)
 
- * I have the logo in the left upper corner on all the pages. This logo also acts as a link back to home page.
+ * I have the logo in the left upper corner and the name of the page.
 
- ![logo-big](assets/images/logo23.png)
+ ![logo-big](assets/favicon/android-chrome-512x512.png)
 
-#### The Home Page
-The home page of Mysterious Things the sites name as a logo and then a container which holds some welcome text, including alerting the users that they can navigate back to the home page at any time by clicking on the logo.
+#### The Budget Tracker
+The site Budget tracker. Begins with a navbar that only contain the name of the page.
+Then a header with a welcome text, after that a section with information about the page and how to get everything working and started, on the right side of the information you will see the form-section , there you can insert your amount and select if it is a income or expense. 
 
 ![Home-page](assets/images/mockup.png)
 
