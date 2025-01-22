@@ -87,14 +87,16 @@ The website are responsive and have:
 
 #### The Budget Tracker
 The site Budget tracker. Begins with a navbar that only contain the name of the page.
-Then a header with a welcome text, after that a section with information about the page and how to get everything working and started, on the right side of the information you will see the form-section , there you can insert your amount and select if it is a income or expense. 
+Then a header with a welcome text, after that a section with information about the page and how to get everything working and started, on the right side of the information you will see the form-section , there you can insert your amount and select if it is a income or expense and choose category and the date.
+Next it comes a new section with the name of Summary. It shows the total income, expense, balance and saving goal and progress.
 
-![Home-page](assets/images/mockup.png)
+A part with a input that shows that you can set your savings goal.
+The same for budget goals, the budget goals apers in the budget goals overview and will show how much you have set a as a roof and how much you have to the limit.
 
-After the container you will see tree bootstraps card's including the tree side page and a button on each 
-that will redirect you to that specific page when pushed on. And the footer with a text that tells you that you can visit them on the social medias bellow, and a button that will take you to the top if you like.
+PieChart and a BarChart. The pie chart will show every expense in different color. 
+The bar chart will show income and expense.
 
-![Home-page-2](assets/images/home2.png)
+
 
 ### Accessibility
 
@@ -103,13 +105,11 @@ I have really tried to ensure that the website is as accessible as possible. I h
 * Using a hover state on all buttons on the site to make it clear to the user if they are hovering over a button.
 * Used the fonts because i think them are easily to read for people with dyslexia, and that include my self.
 
-![Button](assets/images/button-image.png)
-
 ## Technologies Used
 
 ### Languages Used
 
-HTML,CSS
+HTML,CSS,JavaScript 
 
 ### Frameworks,Libraries & Program Used
 
@@ -130,18 +130,18 @@ HTML,CSS
 
 * [W3C CSS Validator](https://jigsaw.w3.org/css-validator/) - To check CSS code.
 
-* [Am I Responsive?](http://ami.responsivedesign.is/) - To show the website image on a range of devices.
+* [Chart.js](https://www.chartjs.org/) - A JavaScript library.
 
 * [Bootstrap](https://getbootstrap.com/) - A HTML & JavaScript library.
 
 ### Deployment
 
-The site is deployed using GitHub Pages - [Mysterious Things](https://johan-4p.github.io/Mysterious-Things/index.html)
+The site is deployed using GitHub Pages - [Budget Tracker](https://johan-4p.github.io/Budget-Tracker/)
 
 To Deploy the site using GitHub Pages:
 
 1. Login (or signup) to Github.
-2. Go to the repository for this project, [Johan-4P/Mysterious-Things](https://github.com/Johan-4P/Mysterious-Things)
+2. Go to the repository for this project, [Johan-4P/Budget-Tracker](https://github.com/Johan-4P/Budget-Tracker)
 3. Click the settings button.
 4. Select pages in the left hand navigation menu.
 5. From the source dropdown select main branch and press save.
@@ -154,7 +154,7 @@ To Deploy the site using GitHub Pages:
 To fork the repository:
 
 1. Log in (or sign up) to Github.
-2. Go to the repository for this project, [Johan-4P/Mysterious-Things](https://github.com/Johan-4P/Mysterious-Things)
+2. Go to the repository for this project,[Johan-4P/Budget-Tracker](https://github.com/Johan-4P/Budget-Tracker)
 3. Click the Fork button in the top right corner.
 
 #### How to Clone
@@ -162,7 +162,7 @@ To fork the repository:
 To clone the repository:
 
 1. Log in (or sign up) to GitHub.
-2. Go to the repository for this project, [Johan-4P/Mysterious-Things](https://github.com/Johan-4P/Mysterious-Things)
+2. Go to the repository for this project, [Johan-4P/Budget-Tracker](https://github.com/Johan-4P/Budget-Tracker)
 3. Click on the code button, select whether you would like to clone with HTTPS, SSH or GitHub CLI and copy the link shown.
 4. Open the terminal in your code editor and change the current working directory to the location you want to use for the cloned directory.
 5. Type 'git clone' into the terminal and then paste the link you copied in step 3. Press enter.
