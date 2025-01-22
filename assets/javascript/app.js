@@ -66,7 +66,10 @@ document.addEventListener("DOMContentLoaded", () => {
         budgetGoals[category] = amount;
         localStorage.setItem("budgetGoals", JSON.stringify(budgetGoals));
         displayBudgetGoals();
-        alert(`Budget goal for ${category} set to ${amount.toFixed(2)}.`);
+
+        // Clear input fields
+        document.getElementById("budget-category").value = "select";
+        document.getElementById("budget-amount").value = "";
     }
 
     // Display budget goals
@@ -74,9 +77,11 @@ document.addEventListener("DOMContentLoaded", () => {
         budgetGoalsList.innerHTML = ""; // Clear existing list
 
         for (const [category, amount] of Object.entries(budgetGoals)) {
+            const spent = expenseCategories[category] || 0;
+            const remaining = amount - spent;
             const listItem = document.createElement("li");
             listItem.innerHTML = `
-                ${category}: ${amount.toFixed(2)}
+                ${category}: ${amount.toFixed(2)} (Remaining: ${remaining.toFixed(2)})
                 <button class="edit-goal" data-category="${category}">Edit</button>
                 <button class="delete-goal" data-category="${category}">Delete</button>
             `;
@@ -216,6 +221,15 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             expenseCategories[category] += amount;
             expenseList.push({ category, amount: -amount, date });
+
+            if (budgetGoals[category]) {
+                const spent = expenseCategories[category] || 0;
+                const remainingBudget = budgetGoals[category] - spent;
+
+                if (remainingBudget < 0) {
+                    alert(`Warning: You have exceeded your budget goal for ${category} by ${Math.abs(remainingBudget).toFixed(2)}!`);
+                }
+            }
         }
 
         addExpenseToTable(category, type === "income" ? amount : -amount, date, expenseList.length - 1);
@@ -223,21 +237,13 @@ document.addEventListener("DOMContentLoaded", () => {
         updateTotals();
         saveExpensesToLocalStorage();
 
-        if (type === "expense" && budgetGoals[category]) {
-            const spent = expenseCategories[category] || 0;
-            const remainingBudget = budgetGoals[category] - spent - amount;
-
-            if (remainingBudget < 0) {
-                alert(`Warning: You have exceeded your budget goal for ${category} by ${Math.abs(remainingBudget).toFixed(2)}!`);
-            }
-        }
-
         amountInput.value = "";
         dateInput.value = "";
         typeInput.value = "income";
         categoryInput.value = "select";
         otherInput.value = "";
         otherInput.style.display = "none";
+        displayBudgetGoals();
     });
 
     // Show/hide "Other" category input
@@ -279,6 +285,7 @@ document.addEventListener("DOMContentLoaded", () => {
             savingsGoal = 0;
             expenseList.length = 0;
             Object.keys(expenseCategories).forEach((key) => delete expenseCategories[key]);
+            Object.keys(budgetGoals).forEach((key) => delete budgetGoals[key]);
 
             localStorage.clear();
             renderExpenseTable();
@@ -286,6 +293,7 @@ document.addEventListener("DOMContentLoaded", () => {
             updateTotals();
             savingsGoalText.innerText = "Savings Goal: $0";
             savingsProgressText.innerText = "Savings Progress: 0%";
+            displayBudgetGoals();
         }
     });
 
