@@ -32,6 +32,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let pieChartInstance, barChartInstance;
 
+    const budgetCategoryInput = document.getElementById("budget-category");
+    const budgetCategoryOtherInput = document.getElementById("budget-category-other");
+
+    // Show/hide "Other" category input for budget goals
+    budgetCategoryInput.addEventListener("change", () => {
+        if (budgetCategoryInput.value === "other") {
+            budgetCategoryOtherInput.style.display = "block";
+        } else {
+            budgetCategoryOtherInput.style.display = "none";
+        }
+    });
+
     // Update totals
     function updateTotals() {
         const balance = totalIncome - totalExpenses;
@@ -55,8 +67,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Save budget goal
     function saveBudgetGoal() {
-        const category = document.getElementById("budget-category").value;
+        let category = budgetCategoryInput.value;
         const amount = parseFloat(document.getElementById("budget-amount").value) || 0;
+
+        if (category === "other") {
+            category = budgetCategoryOtherInput.value.trim();
+            if (!category) {
+                alert("Please enter a category.");
+                return;
+            }
+        }
 
         if (!category || amount <= 0) {
             alert("Please select a category and enter a valid amount.");
@@ -68,8 +88,10 @@ document.addEventListener("DOMContentLoaded", () => {
         displayBudgetGoals();
 
         // Clear input fields
-        document.getElementById("budget-category").value = "select";
+        budgetCategoryInput.value = "select";
         document.getElementById("budget-amount").value = "";
+        budgetCategoryOtherInput.value = "";
+        budgetCategoryOtherInput.style.display = "none";
     }
 
     // Display budget goals
