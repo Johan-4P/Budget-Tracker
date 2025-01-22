@@ -19,11 +19,6 @@ Visit the deployed site: [Budget Tracker](https://johan-4p.github.io/Budget-Trac
     * [Wireframe](#wireframe) 
     * [Features](#features)
         * [The Home Page](#the-home-page)
-        * [The Tarot Page](#the-tarot-page)
-        * [The Rune Page](#the-rune-page)
-        * [The Oracle Page](#the-oracle-page)
-        * [The Questions Page](#the-question-page)
-        * [The Success Page](#the-success-page)
     * [Accessibility](#accessibity)
 * [Technologies Used](#technologies-used)
     * [Languages Used](#languages-used)
@@ -117,49 +112,6 @@ After the container you will see tree bootstraps card's including the tree side 
 that will redirect you to that specific page when pushed on. And the footer with a text that tells you that you can visit them on the social medias bellow, and a button that will take you to the top if you like.
 
 ![Home-page-2](assets/images/home2.png)
-
-#### Tarot Page
-
-The tarot page displays the logo and a header with a mysterious text, and tree card's with more information.
-
-![Tarot](assets/images/mockup-tarot1.png)
-
- And after that it comes a carousel with cards taken from the tarot deck the major arcana.
-
- ![Tarot2](assets/images/mockup-tarot2.png)
-
- #### Rune Page 
-
- This page is almost the same different images and text's.
-
-![Rune](assets/images/mockup-rune.png)
-
-And the carousel.
-
-![Rune2](assets/images/mockup-rune2.png)
-
-#### Oracle Page
-
-This page is almost the same as home page but different images and text's.
-
-![Oracle](assets/images/mockup-oracle.png)
-
-And the carousel.
-
-![Oracle2](assets/images/mockup-oracle2.png)
-
-#### Question Page
-
-This page have first a text that tells you to ask exactly what you want and how to do it.
-Then it is a form with four boxes that you can fill out your name and email, what category it will direct to and your message.
-
-![Question Page](assets/images/mockup-question.png)
-
-#### Success Page
-
-This page tells you that your form has been submitted successfully, and a button to de home page.
-
-![Success](assets/images/mockup-succsess-page.png)
 
 ### Accessibility
 

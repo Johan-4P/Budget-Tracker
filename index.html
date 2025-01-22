@@ -18,7 +18,7 @@
     <nav class="navbar" style="background-color: rgb(75, 81, 169);">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">
-            <img src="assets/favicon/android-chrome-512x512.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+            <img src="/assets/favicon/android-chrome-512x512.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
             Budget Tracker
           </a>
         </div>
@@ -88,6 +88,35 @@
             <input type="number" id="savingsGoal" placeholder="Enter savings goal" required>
             <button type="button" id="update-savings">Set Goal</button>
         </div>
+
+        <section id="budget-goals">
+            <h2>Set Budget Goals</h2>
+            <label for="budget-category">Category</label>
+            <select id="category">
+                <option value="food">Food</option>
+                <option value="housing">Housing</option>
+                <option value="transportation">Transportation</option>
+                <option value="utilities">Utilities</option>
+                <option value="clothing">Clothing</option>
+                <option value="medical">Medical</option>
+                <option value="insurance">Insurance</option>
+                <option value="personal">Personal</option>
+                <option value="debt">Debt</option>
+                <option value="savings">Savings</option>
+                <option value="entertainment">Entertainment</option>
+                <option value="miscellaneous">Miscellaneous</option>
+                <option value="other">Other</option>
+            </select>
+            <label for="budget-amount">Amount</label>
+            <input type="number" id="budget-amount" placeholder="Enter budget amount" required>
+            <button type="button" id="save-budget">Save Goal</button>
+        </section>
+
+        <section id="budget-goals-display">
+            <h2>Budget Goals Overview</h2>
+            <ul id="budget-goals-list"></ul>
+        </section>
+
         <!-- Chart section -->
         <div id="charts-container">
             <canvas id="pieChart" width="400" height="400"></canvas>
