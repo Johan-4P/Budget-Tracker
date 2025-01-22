@@ -191,6 +191,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (category === "other") {
             category = otherInput.value.trim();
+            if (!category) {
+                alert("Please enter a category.");
+                return;
+            }
         }
 
         const amount = parseFloat(amountInput.value) || 0;
@@ -231,9 +235,19 @@ document.addEventListener("DOMContentLoaded", () => {
         amountInput.value = "";
         dateInput.value = "";
         typeInput.value = "income";
-        categoryInput.value = "";
+        categoryInput.value = "select";
         otherInput.value = "";
         otherInput.style.display = "none";
+    });
+
+    // Show/hide "Other" category input
+    categoryInput.addEventListener("change", () => {
+        const otherInput = document.getElementById("category-other");
+        if (categoryInput.value === "other") {
+            otherInput.style.display = "block";
+        } else {
+            otherInput.style.display = "none";
+        }
     });
 
     // Save expenses to localStorage
@@ -277,8 +291,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Load stored data
     function loadStoredData() {
-        expenseList.forEach(({ category, amount, date }) => {
-            addExpenseToTable(category, amount, date);
+        expenseList.forEach(({ category, amount, date }, index) => {
+            addExpenseToTable(category, amount, date, index);
         });
 
         totalIncome = parseFloat(localStorage.getItem("totalIncome")) || 0;
