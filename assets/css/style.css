@@ -66,6 +66,7 @@ main {
     text-align: center;
     width: 40%;
     margin: auto;
+    font-size: 1.2rem;
 }
 
 #budget-goals-display {
@@ -91,6 +92,7 @@ main {
     margin: 10px 0;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
+
 
 #inputs {
     margin-bottom: 30px;
@@ -123,6 +125,8 @@ form button {
     border: none;
     cursor: pointer;
     width: auto;
+    border: 1px solid #000;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 1.0);
 }
 form button:hover {
     background: #0056b3;
@@ -178,6 +182,8 @@ form button:hover {
     color: white;
     border: none;
     cursor: pointer;
+    border: 1px solid #000;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 1.0);
 }
 #savings-section button:hover {
     background: #0056b3;
@@ -213,7 +219,8 @@ form button:hover {
 #budget-goals button {
     background: #007bff;
     color: white;
-    border: none;
+    border: 1px solid #000;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 1.0);
     cursor: pointer;
 }
 #budget-goals button:hover {
@@ -241,6 +248,10 @@ canvas {
     width: 100%;
     border-collapse: collapse;
     margin: 20px 0;
+}
+#expense-table th {
+    border: 1px solid #000;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 1.0);
 }
 
 #expense-table th,
@@ -272,7 +283,8 @@ canvas {
 #reset {
     background-color: #dc3545;
     color: white;
-    border: none;
+    border: 1px solid #000;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 1.0);
     padding: 10px 20px;
     font-size: 1rem;
     cursor: pointer;
