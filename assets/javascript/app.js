@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const savingsGoalText = document.getElementById("savings-goal-text");
     const savingsProgressText = document.getElementById("savings-progress-text");
     const budgetGoalsList = document.getElementById("budget-goals-list");
-    
+    const saveBudgetButton = document.getElementById("save-budget");
 
     let pieChartInstance, barChartInstance;
 
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const balance = totalIncome - totalExpenses;
 
         totalIncomeDisplay.innerText = `Total Income: ${totalIncome.toFixed(2)}`;
-        totalExpensesDisplay.innerText = `Total Expenses: ${totalExpenses.toFixed(2)}`;
+        totalExpensesDisplay.innerText = `Total Expenses: -${totalExpenses.toFixed(2)}`;
         balanceDisplay.innerText = `Balance: ${balance.toFixed(2)}`;
 
         if (savingsGoal > 0) {
@@ -75,22 +75,60 @@ document.addEventListener("DOMContentLoaded", () => {
 
         for (const [category, amount] of Object.entries(budgetGoals)) {
             const listItem = document.createElement("li");
-            listItem.innerText = `${category}: ${amount.toFixed(2)}`;
+            listItem.innerHTML = `
+                ${category}: ${amount.toFixed(2)}
+                <button class="edit-goal" data-category="${category}">Edit</button>
+                <button class="delete-goal" data-category="${category}">Delete</button>
+            `;
+
+            listItem.querySelector(".edit-goal").addEventListener("click", (event) => {
+                const category = event.target.getAttribute("data-category");
+                editBudgetGoal(category);
+            });
+
+            listItem.querySelector(".delete-goal").addEventListener("click", (event) => {
+                const category = event.target.getAttribute("data-category");
+                deleteBudgetGoal(category);
+            });
+
             budgetGoalsList.appendChild(listItem);
         }
     }
 
+    // Edit budget goal
+    function editBudgetGoal(category) {
+        const amount = budgetGoals[category];
+        document.getElementById("budget-category").value = category;
+        document.getElementById("budget-amount").value = amount;
+    }
+
+    // Delete budget goal
+    function deleteBudgetGoal(category) {
+        if (confirm(`Are you sure you want to delete the budget goal for ${category}?`)) {
+            delete budgetGoals[category];
+            localStorage.setItem("budgetGoals", JSON.stringify(budgetGoals));
+            displayBudgetGoals();
+        }
+    }
+
     // Add expenses to table
-    function addExpenseToTable(category, amount, date) {
+    function addExpenseToTable(category, amount, date, index) {
         const newRow = document.createElement("tr");
-        const index = expenseList.length - 1;
 
         newRow.innerHTML = `
             <td>${category}</td>
             <td>${amount.toFixed(2)}</td>
             <td>${date}</td>
-            <td><button class="delete-expense" data-index="${index}">Delete</button></td>
+            <td>
+                <button class="edit-expense" data-index="${index}">Edit</button>
+                <button class="delete-expense" data-index="${index}">Delete</button>
+            </td>
         `;
+
+        newRow.querySelector(".edit-expense").addEventListener("click", (event) => {
+            const rowIndex = parseInt(event.target.getAttribute("data-index"), 10);
+            editExpense(rowIndex);
+        });
 
         newRow.querySelector(".delete-expense").addEventListener("click", (event) => {
             const rowIndex = parseInt(event.target.getAttribute("data-index"), 10);
@@ -100,35 +138,49 @@ document.addEventListener("DOMContentLoaded", () => {
         expenseTableBody.appendChild(newRow);
     }
 
+    // Edit expense
+    function editExpense(index) {
+        const { category, amount, date } = expenseList[index];
+        categoryInput.value = category;
+        amountInput.value = Math.abs(amount);
+        dateInput.value = date;
+        typeInput.value = amount > 0 ? "income" : "expense";
+
+        // Remove the expense from the list temporarily
+        deleteExpense(index, false);
+    }
+
     // Delete expenses
-    function deleteExpense(index) {
-        const { category, amount } = expenseList[index];
+    function deleteExpense(index, update = true) {
+        if (expenseList[index]) {
+            const { category, amount } = expenseList[index];
 
-        if (amount > 0) {
-            totalIncome -= amount;
-        } else {
-            totalExpenses -= Math.abs(amount);
-            expenseCategories[category] -= Math.abs(amount);
+            if (amount > 0) {
+                totalIncome -= amount;
+            } else {
+                totalExpenses -= Math.abs(amount);
+                expenseCategories[category] -= Math.abs(amount);
 
-            if (expenseCategories[category] <= 0) {
-                delete expenseCategories[category];
+                if (expenseCategories[category] <= 0) {
+                    delete expenseCategories[category];
+                }
+            }
+
+            expenseList.splice(index, 1);
+            saveExpensesToLocalStorage();
+
+            if (update) {
+                renderExpenseTable();
+                updateCharts();
+                updateTotals();
             }
         }
-
-        expenseList.splice(index, 1);
-        saveExpensesToLocalStorage();
-
-        renderExpenseTable();
-        updateCharts();
-        updateTotals();
     }
 
     function renderExpenseTable() {
         expenseTableBody.innerHTML = "";
         expenseList.forEach((expense, i) => {
-            addExpenseToTable(expense.category, expense.amount, expense.date);
-            const lastRow = expenseTableBody.lastElementChild;
-            lastRow.querySelector(".delete-expense").setAttribute("data-index", i);
+            addExpenseToTable(expense.category, expense.amount, expense.date, i);
         });
     }
 
@@ -162,7 +214,7 @@ document.addEventListener("DOMContentLoaded", () => {
             expenseList.push({ category, amount: -amount, date });
         }
 
-        addExpenseToTable(category, type === "income" ? amount : -amount, date);
+        addExpenseToTable(category, type === "income" ? amount : -amount, date, expenseList.length - 1);
         updateCharts();
         updateTotals();
         saveExpensesToLocalStorage();
@@ -281,6 +333,7 @@ document.addEventListener("DOMContentLoaded", () => {
             data: {
                 labels: ['Income', 'Expenses'],
                 datasets: [{
+                    label: 'Income and Expenses',
                     data: [income, expenses],
                     backgroundColor: ['#4CAF50', '#F44336']
                 }]
@@ -291,6 +344,9 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+
+    // Add event listener for saving budget goals
+    saveBudgetButton.addEventListener("click", saveBudgetGoal);
 
     loadStoredData();
     updateTotals();
