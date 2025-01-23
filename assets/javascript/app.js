@@ -127,6 +127,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const amount = budgetGoals[category];
         document.getElementById("budget-category").value = category;
         document.getElementById("budget-amount").value = amount;
+        document.getElementById("budget-category-other").style.display = category === "other" ? "block" : "none";
+        document.getElementById("budget-goals").scrollIntoView({ behavior: "smooth" });
     }
 
     // Delete budget goal
@@ -175,6 +177,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Remove the expense from the list temporarily
         deleteExpense(index, false);
+
+        document.getElementById("budget-form").scrollIntoView({ behavior: "smooth" });
     }
 
     // Delete expenses
