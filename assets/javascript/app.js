@@ -1,3 +1,5 @@
+// jshint esversion: 6
+// jshint esversion: 10
 document.addEventListener("DOMContentLoaded", () => {
     let totalIncome = parseFloat(localStorage.getItem("totalIncome")) || 0;
     let totalExpenses = parseFloat(localStorage.getItem("totalExpenses")) || 0;
@@ -400,3 +402,8 @@ document.addEventListener("DOMContentLoaded", () => {
     updateTotals();
     displayBudgetGoals();
 });
+
+function myFunction() {
+    var popup = document.getElementById("myPopup");
+    popup.classList.toggle("show");
+}
