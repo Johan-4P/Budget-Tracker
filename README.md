@@ -96,6 +96,9 @@ The same for budget goals, the budget goals apers in the budget goals overview a
 PieChart and a BarChart. The pie chart will show every expense in different color. 
 The bar chart will show income and expense.
 
+After that it comes a table with Detailed list of Income and Expenses, here you can see all transactions that been made and edit them or delete if you want.
+Last on the page you have the Reset button and that do exactly that it resets the whole page .
+
 
 
 ### Accessibility
@@ -194,7 +197,6 @@ And the rest:
 ### Media
 
 
-https://se.pinterest.com/pin/256283035038856678/
 
 ### Acknowledgments
 
