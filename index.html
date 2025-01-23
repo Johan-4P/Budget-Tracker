@@ -25,7 +25,7 @@
 </head>
 
 <body>
-    <nav class="navbar" style="background-color: rgb(75, 81, 169)">
+    <nav class="navbar" style="background-color: rgb(75, 81, 169); color: white;">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
                 <img src="assets/favicon/android-chrome-512x512.png" alt="Logo" width="30" height="24"
@@ -70,22 +70,22 @@
             <div id="inputs">
                 <h2>Enter your budget data</h2>
                 <form id="budget-form">
-                    <label for="amount">Enter Amount
+                    <label for="amount">Enter Amount:
                         <div class="popup" onclick="myFunction()">
                             <span class="material-symbols-outlined"> info </span>
                             <span class="popuptext" id="myPopup">Here you can enter your amount</span>
                         </div></label>
                     <input type="number" id="amount" placeholder="Amount" required>
-                    <label for="type">Select Type
+                    <label for="type">Select Type:
                         <div class="popup" onclick="myFunction()">
                             <span class="material-symbols-outlined"> info </span>
-                            <span class="popuptext" id="myPopup">Select if it is an income or a expense</span>
+                            <span class="popuptext" id="myPopup">Choose whether it is an income or an expense</span>
                         </div></label>
                     <select id="type">
                         <option value="income">Income</option>
                         <option value="expense">Expense</option>
                     </select>
-                    <label for="category">Choose Category <div class="popup" onclick="myFunction()"><span
+                    <label for="category">Choose Category:<div class="popup" onclick="myFunction()"><span
                                 class="material-symbols-outlined">
                                 info
                             </span>
@@ -112,7 +112,7 @@
                         <option value="other">Other</option>
                     </select>
                     <input type="text" id="category-other" placeholder="Enter Category" style="display: none">
-                    <label for="date">Date: <div class="popup" onclick="myFunction()"><span
+                    <label for="date">Date:<div class="popup" onclick="myFunction()"><span
                                 class="material-symbols-outlined">info</span>
                             <span class="popuptext" id="myPopup">The date is open so you can enter any date you want, past or future transactions.</span>
                         </div></label>

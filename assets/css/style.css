@@ -5,13 +5,19 @@ body {
     color: #333;
 }
 /* Navbar */
-navbar {
-background-color: rgb(75, 81, 169);
-color: white;
-padding: 10px 20px;
+.navbar {
+    background-color: rgb(75, 81, 169);
+    padding: 10px 20px;
+    color: white; /* Ensure text color is white */
 }
+
+.navbar a.navbar-brand {
+    color: white; /* Ensure brand text color is white */
+}
+
 .navbar-brand img {
     border-radius: 5px;
+    color: white;
 }
 /* Header */
 header {
