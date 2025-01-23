@@ -145,7 +145,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // Add expenses to table
     function addExpenseToTable(category, amount, date, index) {
         const newRow = document.createElement("tr");
+        const typeClass = amount > 0 ? "income" : "expense";
 
+        newRow.classList.add(typeClass);
         newRow.innerHTML = `
             <td>${category}</td>
             <td>${amount.toFixed(2)}</td>

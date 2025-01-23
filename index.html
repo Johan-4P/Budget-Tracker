@@ -57,16 +57,10 @@
                     balance. It will display a pie chart and a bar chart of your income
                     and expenses.
                 </p>
-                <br>
-                <p>
-
-                </p>
-                <hr>
                 <p>
                     You can set a saving goal and track your progress, or set a budget
                     goal for different categories and track your progress.
                 </p>
-                <hr>
                 <p>
                     You can also reset the whole page, and to do that scroll down to the
                     bottom of the page.
@@ -117,42 +111,41 @@
                         <option value="miscellaneous">Miscellaneous</option>
                         <option value="other">Other</option>
                     </select>
-                    <input type="text" id="category-other" placeholder="Enter Category" style="display: none" />
+                    <input type="text" id="category-other" placeholder="Enter Category" style="display: none">
                     <label for="date">Date: <div class="popup" onclick="myFunction()"><span
-                                class="material-symbols-outlined">
-                                info
-                            </span>
-                            <span class="popuptext" id="myPopup">The date is open so you can enter any date you want,
-                                past or future
-                                transactions.</span>
-                        </div></label></label>
-                    <input type="date" id="date" required />
+                                class="material-symbols-outlined">info</span>
+                            <span class="popuptext" id="myPopup">The date is open so you can enter any date you want, past or future transactions.</span>
+                        </div></label>
+                    <input type="date" id="date" required>
                     <button type="button" id="add-data">Add</button>
-                                <label for="savingsGoal">Set Savings Goal:</label>
-            <input type="number" id="savingsGoal" placeholder="Enter savings goal" required />
+                                <label for="savingsGoal">Set Savings Goal: 
+                            <div class="popup" onclick="myFunction()"><span
+                                    class="material-symbols-outlined">info</span>
+                                <span class="popuptext" id="myPopup">The savings goal you setting is gonna show in the summary box</span>
+                            </div></label>
+            <input type="number" id="savingsGoal" placeholder="Enter savings goal" required>
             <button type="button" id="update-savings">Set Goal</button>
                 </form>
             </div>
         </section>
         <!-- Summary section -->
         <div id="summary">
-            <h2>Summary <div class="popup" onclick="myFunction()"><span class="material-symbols-outlined">
-                        info
-                    </span>
-                    <span class="popuptext" id="myPopup">Here you will see </span>
-                </div></label></h2>
+            <div class="popup" onclick="myFunction()"><span class="material-symbols-outlined">info</span>
+                    <span class="popuptext" id="myPopup">Here will the calculated numbers show up</span>
+            </div>
+            <h2>Summary </h2>
             <p id="total-income">Income: 0</p>
             <p id="total-expenses">Expense: 0</p>
             <p id="balance">Balance: 0</p>
             <p id="savings-goal-text">Savings: 0</p>
             <p id="savings-progress-text">Savings Progress: 0%</p>
         </div>
-
-        <div id="savings-section">
-
-        </div>
-
+        <!-- Budget Goals section -->
         <section id="budget-goals">
+            <div class="popup" onclick="myFunction()"><span
+                class="material-symbols-outlined">info</span>
+                <span class="popuptext" id="myPopup">If you select category and the amount you want to be your roof, it will calculate and tell you if you override it!</span>
+            </div>
             <h2>Set Budget Goals</h2>
             <label for="budget-category">Category</label>
             <select id="budget-category">
@@ -178,18 +171,35 @@
         </section>
 
         <section id="budget-goals-display" class="text-center">
+            <div class="popup" onclick="myFunction()"><span
+                class="material-symbols-outlined">info</span>
+                <span class="popuptext" id="myPopup">Here can you see the goals you have set up</span>
+            </div>
             <h2>Budget Goals Overview</h2>
             <ul id="budget-goals-list"></ul>
         </section>
 
         <!-- Chart section -->
         <div id="charts-container">
+            <div class="popup" onclick="myFunction()"><span
+                class="material-symbols-outlined">info</span>
+                <span class="popuptext" id="myPopup">The pieChart only show Expenses in detail</span>
+            </div>
             <canvas id="pieChart" width="400" height="400"></canvas>
-            <canvas id="barChart" width="400" height="400"></canvas>
-        </div>
 
+            <canvas id="barChart" width="400" height="400"></canvas>
+            <div class="popup" onclick="myFunction()"><span
+                class="material-symbols-outlined">info</span>
+            <span class="popuptext" id="myPopup">The barChart displays Income and Expenses</span>
+            </div>
+        </div>
+        <!-- Expense list section -->
         <section id="expense-list" class="text-center">
             <h3>Detailed List of Income and Expenses</h3>
+            <div class="popup" onclick="myFunction()"><span
+                class="material-symbols-outlined">info</span>
+                <span class="popuptext" id="myPopup">Here you will see a list over your transactions <br> The Expense will be in red and the Income in green</span>
+            </div>
             <table id="expense-table">
                 <thead>
                     <tr>
@@ -204,6 +214,7 @@
                 </tbody>
             </table>
         </section>
+        <!-- Reset section -->
         <section id="reset-box" class="text-center">
             <h2>Here you can reset the whole page and start over</h2>
             <button type="button" id="reset">Reset</button>

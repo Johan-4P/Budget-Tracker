@@ -340,6 +340,18 @@ canvas {
     background-color: #eef6ff;
 }
 
+#expense-table .income {
+    color: green;
+}
+
+#expense-table .expense {
+    color: red;
+}
+
+#expense-table td {
+    text-transform: capitalize;
+}
+
 /* Reset Button */
 #reset-box {
     margin-top: 20px;
