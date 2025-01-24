@@ -185,20 +185,20 @@ Please refer to [TESTING.md](TESTING.md) file for all testing carried out.
 ---
 
 ## Credits 
-https://www.w3schools.com/icons/default.asp
-https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_popup
-https://fonts.google.com/icons?selected=Material+Symbols+Outlined:info:FILL@0;wght@400;GRAD@0;opsz@24&icon.query=info&icon.size=24&icon.color=%23e8eaed
-https://www.youtube.com/watch?v=TAB_v6yBXIE
+Ive looked at this for some help with popups
+* [ W3Schools ](https://www.w3schools.com/icons/default.asp) - Help with icons.
+* [ W3Schools ](https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_popup) - Help with popups. 
+* [Google Fonts Icons](https://fonts.google.com/icons?selected=Material+Symbols+Outlined:info:FILL@0;wght@400;GRAD@0;opsz@24&icon.query=info&icon.size=24&icon.color=%23e8eaed) - Here did i find the icon.
+* [Youtube-Kevin powell](https://www.youtube.com/watch?v=TAB_v6yBXIE) - He helped a lot.
 
 ### Code Used
 
-* I Used much code from [Bootstrap](https://getbootstrap.com/)
-* I have turned a lot to [ChatGPT](https://chatgpt.com/) - And got good answers.
+* I Used code from [Bootstrap](https://getbootstrap.com/)
+* I have used [ChatGPT](https://chatgpt.com/) - And got good answers.
 
 ### Content 
 
-The information on the home page is written by me.
-And the rest:
+The information on the page is written by me.
 
 ### Media
 
@@ -209,4 +209,4 @@ And the rest:
 I would like to acknowledge the following people:
 
 * Jubril Akolade - My Code Institute Mentor.
-*  The Code Institute Slack - The swedish channel was to big help.
+*  The Code Institute Slack - My Tutor Kay_ci

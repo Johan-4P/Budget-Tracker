@@ -1,5 +1,5 @@
-# Mysterious Things - Testing
-![mockup of Mysterious Things](assets/images/mockup.png)
+# Budget Tracker - Testing
+![a mockup of the homepage](assets/images/mockup1.png)
 
 Visit the deployed site [Mysterious Things](https://johan-4p.github.io/Mysterious-Things/index.html)
 ## CONTENTS
@@ -23,11 +23,20 @@ I have gone through each page using google chrome developer tools to ensure that
 
 [W3C](https://validator.w3.org/) was used to validate the HTML on all pages of the website. It was also used to validate the CSS.
 
-* [index.html](assets/testing/w3/W3Cindex.png) - Passed
+* ![index.html](assets/images/w3c-html.png) Passed.
 
 
-* [style.css](assets/testing/w3/W3Ccss.png) - Passed
+* ![style.css](assets/images/w3c-css.png) Passed.
 
+---
+### JSHint
+* The first warning ive got was two warnings saying that i have wrong esversions. i Google it and got the same answer on multiple sites so this is what i done 
+
+![jshint-fix](assets/images/jshint-fix.png)
+---
+ ![jshint-waring](assets/images/jshint-warnings.png) Looked them up and did find a solution.
+---
+ ![jshint-approved](assets/images/jshint-approved.png) Good results.
 ---
 
 ### Lighthouse
@@ -36,19 +45,11 @@ I used Lighthouse within the Chrome Developer Tools to test the performance, acc
 
 ### Desktop Results
 
-varying results most because all the images i used.
-
-### Desktop Results
-
-* [index.html](assets/testing/w3/lighthouse/main-page.png) 
-
-
+* ![index.html](assets/images/desktop-ligth.png) Good results.
+---
 # Mobile Results
 
-* [index.html](assets/testing/w3/lighthouse/mobile.png) 
-
-
-
+* ![index.html](assets/images/mobile-light.png) - Good results.
 ---
 
 ### Full Testing
@@ -70,7 +71,15 @@ Additional testing was taken by friends and family on a variety of devices and s
 
 | Feature | Expected Outcome | Testing Performed | Result | Pass/Fail |
 | --- | --- | --- | --- | --- |
-| The Sites Logo | Link directs the user back to the home page | Clicked title | Home page reloads | Pass |
-| The tree card's buttons | Links to specifics page| Button clicked | The desired page opens | Pass |
-| The Sites Footer-Button | Get you back to the top of the page | Button clicked | The page refreshes | Pass |
-| The Sites Footer Links | Open up a new page to the desired page | Link clicked | A new page opens to correct page | Pass |
+| Enter amount field | Cant leave empty | did leave it empty | An alert comes up with message: Please fill in all fields | Pass |
+| Enter Choose Category field | Cant leave empty | did leave it empty | An alert comes up with message: Please fill in all fields | Pass |
+| Date field | Cant leave empty | did leave it empty | An alert comes up with message: Please fill in all fields | Pass |
+| Enter savings goal field | Cant leave empty | did leave it empty | An alert comes up with message: Please fill in all fields | Pass |
+| Enter all fields in: Enter your budget data and press Add | All the fields gonna be empty | Button clicked | The page resets with empty fields and the Summary box have been updated | Pass |
+| All Boxes have a information icon thats shows a popup when hoovered | A box with texts shows up | Icon hoovered | A box with text show up | Pass |
+| Budget goals section: Select category, enter amount and click Save Goal | The item you have logged will appear in the table below | Add all and clicked | The item you have logged will appear in the table below | Pass |
+| PieChart when hoovered the name on the item will appear | name on the item will appear | hoovered | The items name did appear | Pass |
+| BarChart when hoovered the name on the item will appear | name on the item will appear | hoovered | The items name did appear | Pass |
+| List of Income and Expenses: Abel to edit the item | Scrolled up to input fields and correct numbers appear | Clicked | Scrolled up to input fields and correct numbers appear | Pass |
+| List of Income and Expenses: Abel to delete the item | Delete the item | Clicked | The item was deleted | Pass |
+| Reset button | Will reset the whole page | Clicked | The page was reset | Pass |
