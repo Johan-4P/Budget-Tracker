@@ -1,3 +1,4 @@
+/* global Chart */
 // jshint esversion: 6
 // jshint esversion: 10
 document.addEventListener("DOMContentLoaded", () => {
@@ -110,18 +111,23 @@ document.addEventListener("DOMContentLoaded", () => {
                 <button class="delete-goal" data-category="${category}">Delete</button>
             `;
 
-            listItem.querySelector(".edit-goal").addEventListener("click", (event) => {
-                const category = event.target.getAttribute("data-category");
-                editBudgetGoal(category);
-            });
-
-            listItem.querySelector(".delete-goal").addEventListener("click", (event) => {
-                const category = event.target.getAttribute("data-category");
-                deleteBudgetGoal(category);
-            });
+            // Use function references instead of inline declarations
+            listItem.querySelector(".edit-goal").addEventListener("click", handleEditGoal);
+            listItem.querySelector(".delete-goal").addEventListener("click", handleDeleteGoal);
 
             budgetGoalsList.appendChild(listItem);
         }
+    }
+
+    // Event handler functions moved outside the loop
+    function handleEditGoal(event) {
+        const category = event.target.getAttribute("data-category");
+        editBudgetGoal(category);
+    }
+
+    function handleDeleteGoal(event) {
+        const category = event.target.getAttribute("data-category");
+        deleteBudgetGoal(category);
     }
 
     // Edit budget goal
@@ -406,16 +412,28 @@ document.addEventListener("DOMContentLoaded", () => {
         barChartInstance = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Income', 'Expenses'],
-                datasets: [{
-                    label: 'Income and Expenses',
-                    data: [income, expenses],
-                    backgroundColor: ['#4CAF50', '#F44336']
-                }]
+                labels: ['Income & Expenses'],
+                datasets: [
+                    {
+                        label: 'Income',
+                        data: [income],
+                        backgroundColor: '#4CAF50'
+                    },
+                    {
+                        label: 'Expenses',
+                        data: [expenses],
+                        backgroundColor: '#F44336'
+                    }
+                ]
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: false
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
             }
         });
     }
@@ -428,7 +446,8 @@ document.addEventListener("DOMContentLoaded", () => {
     displayBudgetGoals();
 });
 
-function togglePopup(element) {
+// Make togglePopup globally available since it's used in HTML
+window.togglePopup = function(element) {
     const popupText = element.querySelector('.popuptext');
     popupText.classList.toggle('show');
-  }
+};

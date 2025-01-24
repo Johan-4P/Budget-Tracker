@@ -133,7 +133,7 @@
         <!-- Summary section -->
         <div id="summary">
 
-            <h2 class="summary-header"> <span class="popup" onclick="myFunction()">
+            <h2 class="h2-header"> <span class="popup" onclick="myFunction()">
                     <span class="material-symbols-outlined">info</span>
                     <span class="popuptext">Here will the calculated numbers show.</span>
                 </span>Summary</h2>
@@ -145,12 +145,11 @@
         </div>
         <!-- Budget Goals section -->
         <section id="budget-goals">
-            <div class="popup" onclick="myFunction()">
-                <span class="material-symbols-outlined">info</span>
-                <span class="popuptext" id="myPopup">If you select category and the amount you want to be your roof, it
-                    will calculate and tell you if you override it!</span>
-            </div>
-            <h2>Set Budget Goals</h2>
+            <h2 class="h2-header"> <span class="popup" onclick="myFunction()">
+                    <span class="material-symbols-outlined">info</span>
+                    <span class="popuptext">If you select category and the amount, you will be abel to see if you
+                        override it.</span>
+                </span>Set Budget Goals</h2>
             <label for="budget-category">Category</label>
             <select id="budget-category">
                 <option value="select">Select</option>
@@ -175,36 +174,35 @@
         </section>
 
         <section id="budget-goals-display" class="text-center">
-            <div class="popup" onclick="myFunction()">
-                <span class="material-symbols-outlined">info</span>
-                <span class="popuptext" id="myPopup">Here can you see the goals you have set up</span>
-            </div>
-            <h2>Budget Goals Overview</h2>
+            <h2 class="h2-header"> <span class="popup" onclick="myFunction()">
+                    <span class="material-symbols-outlined">info</span>
+                    <span class="popuptext">Here can you see the goals.</span>
+                </span>Budget Goals Overview</h2>
             <ul id="budget-goals-list"></ul>
         </section>
 
         <!-- Chart section -->
         <div id="charts-container">
-            <div class="popup" onclick="myFunction()">
+            <span class="popup" onclick="myFunction()">
                 <span class="material-symbols-outlined">info</span>
-                <span class="popuptext" id="myPopup">The pieChart only show Expenses in detail</span>
-            </div>
+                <span class="popuptext">The pieChart only shows Expenses in detail!</span>
+            </span>
             <canvas id="pieChart" width="400" height="400"></canvas>
 
             <canvas id="barChart" width="400" height="400"></canvas>
-            <div class="popup" onclick="myFunction()">
+            <span class="popup" onclick="myFunction()">
                 <span class="material-symbols-outlined">info</span>
-                <span class="popuptext" id="myPopup">The barChart displays Income and Expenses</span>
-            </div>
+                <span class="popuptext">The barChart displays Income and Expenses!</span>
+            </span>
         </div>
         <!-- Expense list section -->
         <section id="expense-list" class="text-center">
-            <h3>Detailed List of Income and Expenses</h3>
-            <div class="popup" onclick="myFunction()">
-                <span class="material-symbols-outlined">info</span>
-                <span class="popuptext" id="myPopup">Here you will see a list over your transactions <br>
-                    The Expense will be in red and the Income in green</span>
-            </div>
+            <h2 class="h2-header"> <span class="popup" onclick="myFunction()">
+                    <span class="material-symbols-outlined">info</span>
+                    <span class="popuptext">transactions list. Green for Income
+                        Red for Expenses.
+                    </span>
+                </span>Detailed List of Income and Expenses</h2>
             <table id="expense-table">
                 <thead>
                     <tr>
@@ -221,7 +219,11 @@
         </section>
         <!-- Reset section -->
         <section id="reset-box" class="text-center">
-            <h2>Here you can reset the whole page and start over</h2>
+            <h2 class="h2-header"> <span class="popup" onclick="myFunction()">
+                    <span class="material-symbols-outlined">info</span>
+                    <span class="popuptext"> Click the button to reset the page.
+                    </span>
+                </span>Reset page</h2>
             <button type="button" id="reset">Reset</button>
         </section>
     </main>
