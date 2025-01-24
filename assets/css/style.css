@@ -4,21 +4,25 @@ body {
     background-color: #1e3474;
     color: #333;
 }
+
 /* Navbar */
 .navbar {
     background-color: rgb(75, 81, 169);
     padding: 10px 20px;
-    color: white; /* Ensure text color is white */
+    color: white;
+    /* Ensure text color is white */
 }
 
 .navbar a.navbar-brand {
-    color: white; /* Ensure brand text color is white */
+    color: white;
+    /* Ensure brand text color is white */
 }
 
 .navbar-brand img {
     border-radius: 5px;
     color: white;
 }
+
 /* Header */
 header {
     padding: 20px 0;
@@ -30,6 +34,7 @@ header h1 {
     font-size: 2.5rem;
     margin-bottom: 10px;
 }
+
 header p {
     font-size: 1.2rem;
 }
@@ -37,6 +42,7 @@ header p {
 .card-1 {
     padding: 20px;
 }
+
 #card-1-div {
     background: linear-gradient(90deg, #007bff, #0056b3);
     border: 1px solid #000000;
@@ -62,8 +68,9 @@ main {
     justify-content: space-between;
     margin-bottom: 30px;
 }
+
 #information {
-    background:  linear-gradient(90deg, #007bff, #0056b3);
+    background: linear-gradient(90deg, #007bff, #0056b3);
     color: white;
     border: 1px solid #000000;
     border-radius: 10px;
@@ -77,12 +84,26 @@ main {
 
 /* Material Icons */
 .material-symbols-outlined {
-  font-variation-settings:
-  'FILL' 0,
-  'wght' 400,
-  'GRAD' 0,
-  'opsz' 20
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
+    gap: 5px;
+    font-variation-settings:
+        'FILL'0,
+        'wght'400,
+        'GRAD'0,
+        'opsz'20;
 }
+.summary-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .summary-header .popuptext {
+    font-size: 1.2rem;
+  }
 
 .popup {
     position: relative;
@@ -92,10 +113,10 @@ main {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-  }
-  
-  /* The actual popup */
-  .popup .popuptext {
+}
+
+/* The actual popup */
+.popup .popuptext {
     visibility: hidden;
     width: 160px;
     background-color: #555;
@@ -110,10 +131,10 @@ main {
     margin-left: -80px;
     opacity: 0;
     transition: opacity 0.3s;
-  }
-  
-  /* Popup arrow */
-  .popup .popuptext::after {
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
     content: "";
     position: absolute;
     top: 100%;
@@ -122,24 +143,34 @@ main {
     border-width: 5px;
     border-style: solid;
     border-color: #555 transparent transparent transparent;
-  }
-  
-  /* Toggle this class - hide and show the popup */
-  .popup:hover .popuptext {
+}
+
+/* Toggle this class - hide and show the popup */
+.popup:hover .popuptext {
     visibility: visible;
     opacity: 1;
-  }
-  
-  /* Add animation (fade in the popup) */
-  @-webkit-keyframes fadeIn {
-    from {opacity: 0;} 
-    to {opacity: 1;}
-  }
-  
-  @keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity:1 ;}
-  }
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
 
 #budget-goals-display {
     background: linear-gradient(90deg, #007bff, #0056b3);
@@ -151,10 +182,12 @@ main {
     text-align: center;
     margin: 10px 150px 20px;
 }
+
 #budget-goals-list {
     list-style-type: none;
     padding: 0;
 }
+
 #budget-goals-list li {
     background: #ffffff;
     color: #333;
@@ -176,7 +209,9 @@ form label {
     font-weight: bold;
 }
 
-form input, form select, form button {
+form input,
+form select,
+form button {
     width: 100%;
     max-width: 400px;
     padding: 10px;
@@ -186,11 +221,14 @@ form input, form select, form button {
     font-size: 1rem;
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 }
-form input:focus, form button:hover {
+
+form input:focus,
+form button:hover {
     border-color: #007bff;
     outline: none;
     background-color: #eef6ff;
 }
+
 form button {
     background: #007bff;
     color: white;
@@ -200,13 +238,14 @@ form button {
     border: 1px solid #000;
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 1.0);
 }
+
 form button:hover {
     background: #0056b3;
 }
 
 /* Summary */
 #summary {
-    background:  linear-gradient(90deg, #007bff, #0056b3);
+    background: linear-gradient(90deg, #007bff, #0056b3);
     color: white;
     border: 1px solid #000000;
     border-radius: 10px;
@@ -215,10 +254,12 @@ form button:hover {
     text-align: center;
     margin: 10px 150px 20px;
 }
+
 #summary p {
     font-size: 1.2rem;
     font-weight: bold;
 }
+
 #summary .highlight {
     color: #007bff;
 }
@@ -235,7 +276,8 @@ form button:hover {
     font-weight: bold;
 }
 
-#savings-section input, #savings-section button {
+#savings-section input,
+#savings-section button {
     width: auto;
     padding: 10px;
     margin-right: 10px;
@@ -244,11 +286,14 @@ form button:hover {
     border-radius: 5px;
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 }
-#savings-section input:focus, #savings-section button:hover {
+
+#savings-section input:focus,
+#savings-section button:hover {
     border-color: #007bff;
     outline: none;
     background-color: #eef6ff;
 }
+
 #savings-section button {
     background: #007bff;
     color: white;
@@ -257,6 +302,7 @@ form button:hover {
     border: 1px solid #000;
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 1.0);
 }
+
 #savings-section button:hover {
     background: #0056b3;
 }
@@ -272,7 +318,11 @@ form button:hover {
     text-align: center;
     margin: 10px 150px 20px;
 }
-#budget-goals label, #budget-goals select, #budget-goals input, #budget-goals button {
+
+#budget-goals label,
+#budget-goals select,
+#budget-goals input,
+#budget-goals button {
     display: block;
     margin: 10px auto;
     width: 80%;
@@ -283,11 +333,14 @@ form button:hover {
     font-size: 1rem;
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 }
-#budget-goals input:focus, #budget-goals button:hover {
+
+#budget-goals input:focus,
+#budget-goals button:hover {
     border-color: #007bff;
     outline: none;
     background-color: #eef6ff;
 }
+
 #budget-goals button {
     background: #007bff;
     color: white;
@@ -295,6 +348,7 @@ form button:hover {
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 1.0);
     cursor: pointer;
 }
+
 #budget-goals button:hover {
     background: #0056b3;
 }
@@ -316,11 +370,13 @@ canvas {
     margin: 30px 0;
     text-align: center;
 }
+
 #expense-table {
     width: 100%;
     border-collapse: collapse;
     margin: 20px 0;
 }
+
 #expense-table th {
     border: 1px solid #000;
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 1.0);
@@ -373,7 +429,7 @@ canvas {
     font-size: 1rem;
     cursor: pointer;
     border-radius: 5px;
-    
+
 }
 
 #reset:hover {
@@ -387,25 +443,32 @@ canvas {
     #charts-container {
         flex-direction: column-reverse;
     }
+
     #summary {
         margin: 10px 10px 20px;
     }
+
     #budget-goals-display {
         margin: 10px 10px 20px;
     }
+
     #information {
         width: 90%;
         margin: 10px 10px 20px;
     }
+
     #budget-goals {
         margin: 10px 10px 20px;
     }
+
     #savings-section {
         margin: 10px 10px 20px;
     }
+
     #expense-list {
         margin: 10px 10px 20px;
     }
+
     .form-section {
         flex-direction: column;
     }

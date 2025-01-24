@@ -130,7 +130,9 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("budget-category").value = category;
         document.getElementById("budget-amount").value = amount;
         document.getElementById("budget-category-other").style.display = category === "other" ? "block" : "none";
-        document.getElementById("budget-goals").scrollIntoView({ behavior: "smooth" });
+        document.getElementById("budget-goals").scrollIntoView({
+            behavior: "smooth"
+        });
     }
 
     // Delete budget goal
@@ -173,7 +175,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Edit expense
     function editExpense(index) {
-        const { category, amount, date } = expenseList[index];
+        const {
+            category,
+            amount,
+            date
+        } = expenseList[index];
         categoryInput.value = category;
         amountInput.value = Math.abs(amount);
         dateInput.value = date;
@@ -182,13 +188,18 @@ document.addEventListener("DOMContentLoaded", () => {
         // Remove the expense from the list temporarily
         deleteExpense(index, false);
 
-        document.getElementById("budget-form").scrollIntoView({ behavior: "smooth" });
+        document.getElementById("budget-form").scrollIntoView({
+            behavior: "smooth"
+        });
     }
 
     // Delete expenses
     function deleteExpense(index, update = true) {
         if (expenseList[index]) {
-            const { category, amount } = expenseList[index];
+            const {
+                category,
+                amount
+            } = expenseList[index];
 
             if (amount > 0) {
                 totalIncome -= amount;
@@ -243,14 +254,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (type === "income") {
             totalIncome += amount;
-            expenseList.push({ category, amount, date });
+            expenseList.push({
+                category,
+                amount,
+                date
+            });
         } else if (type === "expense") {
             totalExpenses += amount;
             if (!expenseCategories[category]) {
                 expenseCategories[category] = 0;
             }
             expenseCategories[category] += amount;
-            expenseList.push({ category, amount: -amount, date });
+            expenseList.push({
+                category,
+                amount: -amount,
+                date
+            });
 
             if (budgetGoals[category]) {
                 const spent = expenseCategories[category] || 0;
@@ -329,7 +348,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Load stored data
     function loadStoredData() {
-        expenseList.forEach(({ category, amount, date }, index) => {
+        expenseList.forEach(({
+            category,
+            amount,
+            date
+        }, index) => {
             addExpenseToTable(category, amount, date, index);
         });
 
@@ -405,7 +428,7 @@ document.addEventListener("DOMContentLoaded", () => {
     displayBudgetGoals();
 });
 
-function myFunction() {
-    var popup = document.getElementById("myPopup");
-    popup.classList.toggle("show");
-}
+function togglePopup(element) {
+    const popupText = element.querySelector('.popuptext');
+    popupText.classList.toggle('show');
+  }
