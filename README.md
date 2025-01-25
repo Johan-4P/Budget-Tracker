@@ -26,7 +26,6 @@ Visit the deployed site: [Budget Tracker](https://johan-4p.github.io/Budget-Trac
     * [Deployment](#deployment)
     * [Local Development](#local-development)
 * [Testing](#testing)
-    * [Solved Bugs](#solved-bugs)
 * [Credits](#credits)
     * [Code Used](#code-used) 
     * [Content](#content)
@@ -206,11 +205,6 @@ To clone the repository:
 ## Testing 
 Please refer to [TESTING.md](TESTING.md) file for all testing carried out.
 
-### Solved Bugs
-
-| No | Bug | How I solved the issue |
-| :--- | :--- | :--- |
-
 
 ---
 
@@ -220,6 +214,8 @@ Ive looked at this for some help with popups
 * [ W3Schools ](https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_popup) - Help with popups. 
 * [Google Fonts Icons](https://fonts.google.com/icons?selected=Material+Symbols+Outlined:info:FILL@0;wght@400;GRAD@0;opsz@24&icon.query=info&icon.size=24&icon.color=%23e8eaed) - Here did i find the icon.
 * [Youtube-Kevin powell](https://www.youtube.com/watch?v=TAB_v6yBXIE) - He helped a lot.
+
+* [Chart.js](https://www.chartjs.org/) - Helped me to get the charts up and running.
 
 ### Code Used
 
