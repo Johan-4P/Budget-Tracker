@@ -81,33 +81,49 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem("totalExpenses", totalExpenses);
     }
 
-    // Save budget goal
+    // Save budget goal with validation
     function saveBudgetGoal() {
+        const form = document.getElementById('budget-goals-form');
+        const categoryOther = document.getElementById('budget-category-other');
+        
+        // Enable validation on category-other only when it's visible
+        if (budgetCategoryInput.value === 'other') {
+            categoryOther.setAttribute('required', '');
+        } else {
+            categoryOther.removeAttribute('required');
+        }
+        
+        // Add Bootstrap validation classes
+        form.classList.add('was-validated');
+    
+        if (!form.checkValidity()) {
+            return; // Stop if form is invalid
+        }
+    
         let category = budgetCategoryInput.value;
         const amount = parseFloat(document.getElementById("budget-amount").value) || 0;
-
-        if (category === "other") {
-            category = budgetCategoryOtherInput.value.trim();
-            if (!category) {
-                alert("Please enter a category.");
-                return;
-            }
-        }
-
-        if (!category || amount <= 0) {
-            alert("Please select a category and enter a valid amount.");
+    
+        if (category === "select" || amount <= 0) {
             return;
         }
-
+    
+        if (category === "other") {
+            category = categoryOther.value.trim();
+            if (!category) return;
+        }
+    
         budgetGoals[category] = amount;
         localStorage.setItem("budgetGoals", JSON.stringify(budgetGoals));
         displayBudgetGoals();
-
+    
         // Clear input fields
         budgetCategoryInput.value = "select";
         document.getElementById("budget-amount").value = "";
-        budgetCategoryOtherInput.value = "";
-        budgetCategoryOtherInput.style.display = "none";
+        categoryOther.value = "";
+        categoryOther.style.display = "none";
+        
+        // Reset validation state
+        form.classList.remove('was-validated');
     }
 
     // Display budget goals
@@ -249,28 +265,39 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Add data
+    // Add data with form validation
     addDataButton.addEventListener("click", () => {
+        const form = document.getElementById('budget-form');
+        const categoryOther = document.getElementById('category-other');
+        
+        // Enable validation on category-other only when it's visible
+        if (categoryInput.value === 'other') {
+            categoryOther.setAttribute('required', '');
+        } else {
+            categoryOther.removeAttribute('required');
+        }
+        
+        // Add Bootstrap validation classes
+        form.classList.add('was-validated');
+    
+        if (!form.checkValidity()) {
+            return; // Stop if form is invalid
+        }
+    
         let category = categoryInput.value;
         const otherInput = document.getElementById("category-other");
-
+    
         if (category === "other") {
             category = otherInput.value.trim();
-            if (!category) {
-                alert("Please enter a category.");
-                return;
-            }
+            if (!category) return;
         }
-
+    
         const amount = parseFloat(amountInput.value) || 0;
         const type = typeInput.value;
         const date = dateInput.value;
-
-        if (!category || !amount || !date) {
-            alert("Please fill in all fields.");
-            return;
-        }
-
+    
+        if (!category || !amount || !date) return;
+    
         if (type === "income") {
             totalIncome += amount;
             expenseList.push({
@@ -289,22 +316,22 @@ document.addEventListener("DOMContentLoaded", () => {
                 amount: -amount,
                 date
             });
-
+    
             if (budgetGoals[category]) {
                 const spent = expenseCategories[category] || 0;
                 const remainingBudget = budgetGoals[category] - spent;
-
+    
                 if (remainingBudget < 0) {
-                    alert(`Warning: You have exceeded your budget goal for ${category} by ${Math.abs(remainingBudget).toFixed(2)}!`);
+                    console.log(`Budget exceeded for ${category}`);
                 }
             }
         }
-
+    
         addExpenseToTable(category, type === "income" ? amount : -amount, date, expenseList.length - 1);
         updateCharts();
         updateTotals();
         saveExpensesToLocalStorage();
-
+    
         amountInput.value = "";
         dateInput.value = "";
         typeInput.value = "income";
@@ -312,6 +339,9 @@ document.addEventListener("DOMContentLoaded", () => {
         otherInput.value = "";
         otherInput.style.display = "none";
         displayBudgetGoals();
+    
+        // Reset form validation state
+        form.classList.remove('was-validated');
     });
 
     // Show/hide "Other" category input
@@ -330,19 +360,26 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem("expenseList", JSON.stringify(expenseList));
     }
 
-    // Update savings
+    // Update savings with separate validation
     updateSavingsButton.addEventListener("click", () => {
-        savingsGoal = parseFloat(savingsGoalInput.value) || 0;
-
-        if (savingsGoal <= 0) {
-            alert("Please enter a valid savings goal.");
+        const savingsForm = document.getElementById('savings-form');
+        const savingsGoalInput = document.getElementById("savingsGoal");
+        
+        // Add Bootstrap validation classes
+        savingsForm.classList.add('was-validated');
+    
+        if (!savingsForm.checkValidity() || parseFloat(savingsGoalInput.value) <= 0) {
             return;
         }
-
+    
+        savingsGoal = parseFloat(savingsGoalInput.value);
         savingsGoalInput.value = "";
         savingsGoalText.innerText = `Savings Goal: $${savingsGoal.toFixed(2)}`;
         localStorage.setItem("savingsGoal", savingsGoal);
         updateTotals();
+        
+        // Reset validation state
+        savingsForm.classList.remove('was-validated');
     });
 
     // Restore data

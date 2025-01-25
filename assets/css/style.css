@@ -245,6 +245,28 @@ form button:hover {
     background: #0056b3;
 }
 
+/* Add Bootstrap validation styling */
+.form-control.is-invalid {
+    border-color: #dc3545;
+    padding-right: calc(1.5em + 0.75rem);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(0.375em + 0.1875rem) center;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+}
+
+.invalid-feedback {
+    display: none;
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 0.875em;
+    color: #dc3545;
+}
+
+.was-validated .form-control:invalid ~ .invalid-feedback {
+    display: block;
+}
+
 /* Summary */
 #summary {
     background: linear-gradient(90deg, #007bff, #0056b3);
@@ -353,6 +375,71 @@ form button:hover {
 
 #budget-goals button:hover {
     background: #0056b3;
+}
+
+/* Improved Budget Goals Form Styling */
+#budget-goals-form {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+}
+
+#budget-goals-form .form-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+#budget-goals-form label {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: white;
+    display: block;
+}
+
+#budget-goals-form .form-control {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+#budget-goals-form .form-control:focus {
+    border-color: #fff;
+    background-color: #fff;
+    box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.25);
+}
+
+#budget-goals-form select.form-control {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 16px 12px;
+    padding-right: 2.5rem;
+}
+
+#budget-goals-form #save-budget {
+    width: 100%;
+    padding: 12px;
+    margin-top: 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    background: #fff;
+    color: #007bff;
+    border: none;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+#budget-goals-form #save-budget:hover {
+    background: #e6e6e6;
+    transform: translateY(-1px);
 }
 
 /* Charts */
@@ -471,6 +558,27 @@ canvas {
     background-color: #bd2130;
 }
 
+/* Add styles for savings form */
+#savings-form {
+    border-top: 1px solid #ddd;
+    padding-top: 1rem;
+    margin-top: 1rem;
+}
+
+#savings-form .form-group {
+    margin-bottom: 1rem;
+}
+
+/* Add styles for budget goals form */
+#budget-goals-form .form-group {
+    margin-bottom: 1rem;
+}
+
+#budget-goals-form .form-control {
+    max-width: 100%;
+    margin: 0 auto 1rem;
+}
+
 /* Media Queries */
 
 /* Extra small devices (phones, 600px and down) */
@@ -508,6 +616,43 @@ canvas {
         flex-direction: column;
     }
 
+    
+    #expense-table {
+        margin: 20px -20px;
+        font-size: 0.9rem;
+    }
+
+    #expense-table th,
+    #expense-table td {
+        padding: 6px 4px;
+    }
+
+    /* Improve date column display */
+    #expense-table td:nth-child(3) {
+        font-size: 0.8rem;
+        min-width: 70px;
+        max-width: 80px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    /* Format date to be more compact */
+    #expense-table td:nth-child(3) {
+        white-space: nowrap;
+    }
+
+    .edit-expense,
+    .delete-expense {
+        padding: 4px 8px;
+        margin: 2px;
+        font-size: 0.8rem;
+        width: auto;
+        min-width: 50px;
+    }
+
+    #expense-table td:last-child {
+        white-space: nowrap;
+    }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
