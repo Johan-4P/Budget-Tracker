@@ -416,6 +416,39 @@ canvas {
     text-transform: capitalize;
 }
 
+
+.edit-expense, .delete-expense {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+
+.edit-expense:hover, .delete-expense:hover {
+    border-color: #007bff;
+    outline: none;
+    background-color: #eef6ff;
+}
+
+.edit-expense, .delete-expense {
+    background: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: auto;
+    border: 1px solid #000;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 1.0);
+}
+
+.edit-expense:hover, .delete-expense:hover {
+    background: #0056b3;
+}
+
 /* Reset Button */
 #reset-box {
     margin-top: 20px;
