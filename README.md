@@ -2,7 +2,7 @@
 
 Budget Tracker is a website there you can go to if you want to get hold on your economy. There you can insert numbers and the site will calculate the numbers for you!
 
-![a mockup of the homepage](assets/images/mockup1.png)
+![a mockup of the homepage](assets/images/mockup.png)
 
 
 Visit the deployed site: [Budget Tracker](https://johan-4p.github.io/Budget-Tracker/)
@@ -79,26 +79,57 @@ The website build with one page
 The website are responsive and have:
 * A favicon in the browser tab.
 
- ![Logo](assets/favicon/android-chrome-512x512.png)
+ ![Logo](assets/images/navbar.png)
 
- * I have the logo in the left upper corner and the name of the page.
 
- ![logo-big](assets/favicon/android-chrome-512x512.png)
 
 #### The Budget Tracker
 The site Budget tracker. Begins with a navbar that only contain the name of the page.
-Then a header with a welcome text, after that a section with information about the page and how to get everything working and started, on the right side of the information you will see the form-section , there you can insert your amount and select if it is a income or expense and choose category and the date.
-Next it comes a new section with the name of Summary. It shows the total income, expense, balance and saving goal and progress.
+Then a header with a welcome text ![welcome](assets/images/welcome.png)
+
+ After that a section with information about the page and how to get everything working and started 
+ 
+ ![information](assets/images/information.png)
+ 
+  on the right side of the information you will see the form-section 
+  
+  ![input1](assets/images/input-section-1.png)
+
+There you can insert your amount and select if it is a income or expense and choose category and the date.
 
 A part with a input that shows that you can set your savings goal.
-The same for budget goals, the budget goals apers in the budget goals overview and will show how much you have set a as a roof and how much you have to the limit.
 
-PieChart and a BarChart. The pie chart will show every expense in different color. 
+Next it comes a new section with the name of Summary.
+
+ ![summary](assets/images/summary.png)
+
+ It shows the total income, expense, balance and saving goal and progress.
+
+
+Budget goals, the budget goals apers in the budget goals overview and will show how much you have set a as a roof and how much you have to the limit.
+
+![budget-goals](assets/images/budget-goals.png)
+
+PieChart and a BarChart.
+
+![chart](assets/images/charts.png)
+
+ The pie chart will show every expense in different color. 
 The bar chart will show income and expense.
 
-After that it comes a table with Detailed list of Income and Expenses, here you can see all transactions that been made and edit them or delete if you want.
+After that it comes a table with Detailed list of Income and Expenses
+
+![list](assets/images/list.png)
+
+ here you can see all transactions that been made and edit them or delete if you want.
+
 Last on the page you have the Reset button and that do exactly that it resets the whole page .
 
+![reset](assets/images/reset.png)
+
+After reset: 
+
+![after](assets/images/after-reset.png)
 
 
 ### Accessibility
@@ -179,8 +210,7 @@ Please refer to [TESTING.md](TESTING.md) file for all testing carried out.
 
 | No | Bug | How I solved the issue |
 | :--- | :--- | :--- |
-| 1 | An error was displaying in the consol when next was clicked on the carousel | I have forgot to giv it correct filepath |
-| 2 | Got 404 when trying to implement favicon | I have placed it in wrong folder |
+
 
 ---
 

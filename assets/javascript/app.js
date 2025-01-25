@@ -15,28 +15,41 @@ document.addEventListener("DOMContentLoaded", () => {
             return {};
         }
     })();
-
+    // Input section
     const amountInput = document.getElementById("amount");
     const typeInput = document.getElementById("type");
     const dateInput = document.getElementById("date");
     const categoryInput = document.getElementById("category");
     const addDataButton = document.getElementById("add-data");
-    const savingsGoalInput = document.getElementById("savingsGoal");
-    const updateSavingsButton = document.getElementById("update-savings");
-    const resetButton = document.getElementById("reset");
-    const expenseTableBody = document.getElementById("expense-table").querySelector("tbody");
+
+    //summary section
     const totalIncomeDisplay = document.getElementById("total-income");
     const totalExpensesDisplay = document.getElementById("total-expenses");
     const balanceDisplay = document.getElementById("balance");
+
+    // savings section
+    const savingsGoalInput = document.getElementById("savingsGoal");
+    const updateSavingsButton = document.getElementById("update-savings");
+    const saveBudgetButton = document.getElementById("save-budget");
     const savingsGoalText = document.getElementById("savings-goal-text");
     const savingsProgressText = document.getElementById("savings-progress-text");
+
+    // Table section
+    const expenseTableBody = document.getElementById("expense-table").querySelector("tbody");
+
+    // Budget goals section
     const budgetGoalsList = document.getElementById("budget-goals-list");
-    const saveBudgetButton = document.getElementById("save-budget");
-
-    let pieChartInstance, barChartInstance;
-
     const budgetCategoryInput = document.getElementById("budget-category");
     const budgetCategoryOtherInput = document.getElementById("budget-category-other");
+
+    // Chart section
+    let pieChartInstance, barChartInstance;
+
+    // Reset section
+    const resetButton = document.getElementById("reset");
+   
+
+
 
     // Show/hide "Other" category input for budget goals
     budgetCategoryInput.addEventListener("change", () => {

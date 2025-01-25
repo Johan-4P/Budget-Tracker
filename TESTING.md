@@ -1,7 +1,8 @@
 # Budget Tracker - Testing
-![a mockup of the homepage](assets/images/mockup1.png)
+![a mockup of the homepage](assets/images/mockup.png)
 
-Visit the deployed site [Mysterious Things](https://johan-4p.github.io/Mysterious-Things/index.html)
+Visit the deployed site: [Budget Tracker](https://johan-4p.github.io/Budget-Tracker/)
+
 ## CONTENTS
 
 * [AUTOMATED TESTING](#automated-testing)
