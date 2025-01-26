@@ -629,88 +629,202 @@ canvas {
 }
 
 /* New styles for the table layout */
-.budget-table {
-    background: #ffffff;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.budget-header {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr 1fr 2fr 1fr;
-    background: #f8f9fa;
-    font-weight: bold;
-    border-bottom: 2px solid #dee2e6;
-}
-
+.budget-table,
+.budget-header,
 .budget-row {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr 1fr 2fr 1fr;
-    border-bottom: 1px solid #dee2e6;
-    transition: background-color 0.2s;
+    display: none;
 }
 
-.budget-row:hover {
-    background-color: #f8f9fa;
+/* Budget Goals Table Styling */
+#budget-goals-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background: white;
 }
 
-.budget-header div, .budget-row div {
+#budget-goals-table th {
+    background-color: #007bff;
+    color: white;
+    border: 1px solid #000;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 1.0);
     padding: 12px;
     text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
-.budget-row div:first-child {
+#budget-goals-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
     text-transform: capitalize;
 }
 
-.progress-cell {
-    padding: 8px 12px !important;
+#budget-goals-table tr:nth-child(even) {
+    background-color: #f9f9f9;
 }
 
-.progress-cell .progress {
-    width: 100%;
+#budget-goals-table tr:hover {
+    background-color: #eef6ff;
+}
+
+#budget-goals-table .progress-cell {
+    min-width: 150px;
+    padding: 10px;
+}
+
+#budget-goals-table .progress {
+    margin: 0;
     height: 20px;
-    background-color: #e9ecef;
-    border-radius: 4px;
 }
 
-.progress-cell .progress-bar {
-    font-size: 12px;
-    line-height: 20px;
-    font-weight: bold;
-    min-width: 30px;
-}
-
-.budget-actions {
-    gap: 4px;
-}
-
-.budget-actions button {
-    padding: 4px 8px;
-    font-size: 0.8rem;
-}
-
-@media (max-width: 768px) {
-    .budget-header, .budget-row {
-        grid-template-columns: 1fr 1fr 1fr;
+/* Mobile responsiveness for the table */
+@media screen and (max-width: 768px) {
+    #budget-goals-table, 
+    #budget-goals-table tbody, 
+    #budget-goals-table tr, 
+    #budget-goals-table td {
+        display: block;
     }
 
-    .budget-header div:nth-child(n+4), 
-    .budget-row div:nth-child(n+4) {
+    #budget-goals-table thead {
+        display: none; /* Hide headers on mobile */
+    }
+
+    #budget-goals-table tr {
+        margin-bottom: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background: #fff;
+        padding: 8px;
+    }
+
+    #budget-goals-table td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px;
+        border: none;
+        border-bottom: 1px solid #eee;
+    }
+
+    #budget-goals-table td:last-child {
+        border-bottom: none;
+    }
+
+    #budget-goals-table td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        margin-right: 1rem;
+        min-width: 100px;
+        text-align: left;
+    }
+
+    #budget-goals-table .progress-cell {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    #budget-goals-table .progress-cell::before {
+        margin-bottom: 8px;
+        align-self: flex-start;
+    }
+
+    #budget-goals-table .progress {
+        width: 100%;
+    }
+}
+
+/* Remove old styles that might conflict */
+.budget-table,
+.budget-header,
+.budget-row {
+    display: none;
+}
+
+/* Budget Goals Overview Responsive Styles */
+.budget-table {
+    width: 100%;
+    background: #ffffff;
+    border-radius: 8px;
+    overflow-x: auto;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 1rem;
+}
+
+.budget-header, .budget-row {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr 2fr 1fr;
+}
+
+@media screen and (max-width: 768px) {
+    #budget-goals-display {
+        margin: 10px;
+        padding: 10px;
+        width: min-content;
+    }
+
+    .budget-table {
+        font-size: 0.9rem;
+    }
+
+    .budget-row {
+        display: flex;
+        flex-direction: column;
+        padding: 12px;
+        margin-bottom: 12px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .budget-header {
         display: none;
     }
 
-    .budget-actions {
+    .budget-row div {
         display: flex;
-        padding: 8px;
-        background: #f8f9fa;
-        border-top: 1px solid #dee2e6;
+        justify-content: space-between;
+        padding: 8px 0;
+        border-bottom: 1px solid #eee;
+    }
+
+    .budget-row div:last-child {
+        border-bottom: none;
+    }
+
+    .budget-row div::before {
+        content: attr(data-label);
+        font-weight: bold;
+        margin-right: 8px;
+        color: #666;
+    }
+
+    .progress-cell {
+        flex-direction: column;
+        align-items: stretch !important;
+    }
+
+    .progress-cell::before {
+        margin-bottom: 8px;
+    }
+
+    .progress {
+        width: 100%;
+        margin: 4px 0;
+    }
+
+    .budget-actions {
+        justify-content: flex-start;
+        gap: 8px;
+        padding-top: 8px;
+    }
+
+    .budget-actions button {
+        flex: 1;
+        max-width: 120px;
     }
 }
+
 
 /* Media Queries */
 
@@ -720,36 +834,22 @@ canvas {
         flex-direction: column-reverse;
     }
 
-    #summary {
-        margin: 10px 10px 20px;
-    }
-
-    #budget-goals-display {
-        margin: 10px 10px 20px;
-    }
-
-    #information {
-        width: 90%;
-        margin: 10px 10px 20px;
-    }
-
-    #budget-goals {
-        margin: 10px 10px 20px;
-    }
-
-    #savings-section {
-        margin: 10px 10px 20px;
-    }
-
+    #summary,
+    #budget-goals-display,
+    #information,
+    #budget-goals,
+    #savings-section,
     #expense-list {
-        margin: 10px 10px 20px;
+        width: auto;
+        margin: 10px;
+        padding: 15px;
     }
 
     .form-section {
         flex-direction: column;
+        padding: 10px;
     }
 
-    
     #expense-table {
         margin: 20px -20px;
         font-size: 0.9rem;
@@ -760,17 +860,12 @@ canvas {
         padding: 6px 4px;
     }
 
-    /* Improve date column display */
     #expense-table td:nth-child(3) {
         font-size: 0.8rem;
         min-width: 70px;
         max-width: 80px;
         overflow: hidden;
         text-overflow: ellipsis;
-    }
-
-    /* Format date to be more compact */
-    #expense-table td:nth-child(3) {
         white-space: nowrap;
     }
 
@@ -788,13 +883,74 @@ canvas {
     }
 }
 
-/* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {
+/* Medium devices (tablets, 768px and down) */
+@media screen and (max-width: 768px) {
+    #budget-goals-table, 
+    #budget-goals-table tbody, 
+    #budget-goals-table tr, 
+    #budget-goals-table td {
+        display: block;
+    }
+
+    #budget-goals-table thead {
+        display: none;
+    }
+
+    #budget-goals-table tr {
+        margin-bottom: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background: #fff;
+        padding: 8px;
+    }
+
+    #budget-goals-table td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px;
+        border: none;
+        border-bottom: 1px solid #eee;
+    }
+
+    #budget-goals-table td:last-child {
+        border-bottom: none;
+    }
+
+    #budget-goals-table td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        margin-right: 1rem;
+        min-width: 100px;
+        text-align: left;
+    }
+
+    #budget-goals-table .progress-cell {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    #budget-goals-table .progress-cell::before {
+        margin-bottom: 8px;
+        align-self: flex-start;
+    }
+
+    #budget-goals-table .progress {
+        width: 100%;
+    }
+
     #charts-container {
         flex-direction: column;
         align-items: center;
     }
-    
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    #charts-container {
+        flex-direction: column;
+        align-items: center;
+    }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */

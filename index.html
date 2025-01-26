@@ -214,11 +214,27 @@
         </section>
 
         <section id="budget-goals-display" class="text-center">
-            <h2 class="h2-header"> <span class="popup" onclick="myFunction()">
+            <h2 class="h2-header">
+                <span class="popup" onclick="myFunction()">
                     <span class="material-symbols-outlined">info</span>
                     <span class="popuptext">Here can you see the goals.</span>
-                </span>Budget Goals Overview</h2>
-            <ul id="budget-goals-list"></ul>
+                </span>Budget Goals Overview
+            </h2>
+            <table id="budget-goals-table">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Budget</th>
+                        <th>Spent</th>
+                        <th>Remaining</th>
+                        <th>Progress</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="budget-goals-list">
+                    <!-- Goals will be dynamically added here -->
+                </tbody>
+            </table>
         </section>
 
         <!-- Chart section -->

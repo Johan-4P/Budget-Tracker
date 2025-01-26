@@ -128,20 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Display budget goals
     function displayBudgetGoals() {
-        budgetGoalsList.innerHTML = `
-            <div class="budget-table">
-                <div class="budget-header">
-                    <div>Category</div>
-                    <div>Budget</div>
-                    <div>Spent</div>
-                    <div>Remaining</div>
-                    <div>Progress</div>
-                    <div>Actions</div>
-                </div>
-            </div>
-        `;
-
-        const tableContainer = budgetGoalsList.querySelector('.budget-table');
+        budgetGoalsList.innerHTML = '';
 
         for (const [category, amount] of Object.entries(budgetGoals)) {
             const spent = expenseCategories[category] || 0;
@@ -149,14 +136,13 @@ document.addEventListener("DOMContentLoaded", () => {
             const progress = (spent / amount) * 100;
             const progressColor = remaining < 0 ? 'danger' : progress > 90 ? 'warning' : 'success';
             
-            const row = document.createElement('div');
-            row.className = 'budget-row';
+            const row = document.createElement('tr');
             row.innerHTML = `
-                <div>${category}</div>
-                <div>${amount.toFixed(2)}</div>
-                <div>${spent.toFixed(2)}</div>
-                <div>${remaining.toFixed(2)}</div>
-                <div class="progress-cell">
+                <td data-label="Category">${category}</td>
+                <td data-label="Budget">${amount.toFixed(2)}</td>
+                <td data-label="Spent">${spent.toFixed(2)}</td>
+                <td data-label="Remaining">${remaining.toFixed(2)}</td>
+                <td data-label="Progress" class="progress-cell">
                     <div class="progress">
                         <div class="progress-bar bg-${progressColor}" 
                              role="progressbar" 
@@ -167,18 +153,18 @@ document.addEventListener("DOMContentLoaded", () => {
                             ${progress.toFixed(1)}%
                         </div>
                     </div>
-                </div>
-                <div class="budget-actions">
+                </td>
+                <td data-label="Actions">
                     <button class="edit-goal btn btn-sm btn-primary" data-category="${category}">Edit</button>
                     <button class="delete-goal btn btn-sm btn-danger" data-category="${category}">Delete</button>
-                </div>
+                </td>
             `;
 
             // Add event listeners
             row.querySelector(".edit-goal").addEventListener("click", handleEditGoal);
             row.querySelector(".delete-goal").addEventListener("click", handleDeleteGoal);
 
-            tableContainer.appendChild(row);
+            budgetGoalsList.appendChild(row);
         }
     }
 
@@ -346,10 +332,10 @@ document.addEventListener("DOMContentLoaded", () => {
                         html: `
                             <div style="text-align: left;">
                                 <p>Category: ${category}</p>
-                                <p>Budget Limit: $${budgetLimit.toFixed(2)}</p>
-                                <p>Current Spent: $${(expenseCategories[category] || 0).toFixed(2)}</p>
-                                <p>This Expense: $${amount.toFixed(2)}</p>
-                                <p>Will Exceed By: $${(newTotal - budgetLimit).toFixed(2)}</p>
+                                <p>Budget Limit: ${budgetLimit.toFixed(2)}</p>
+                                <p>Current Spent: ${(expenseCategories[category] || 0).toFixed(2)}</p>
+                                <p>This Expense: ${amount.toFixed(2)}</p>
+                                <p>Will Exceed By: ${(newTotal - budgetLimit).toFixed(2)}</p>
                             </div>
                         `,
                         icon: 'warning',
@@ -371,9 +357,9 @@ document.addEventListener("DOMContentLoaded", () => {
                         html: `
                             <div style="text-align: left;">
                                 <p>Category: ${category}</p>
-                                <p>Budget Limit: $${budgetLimit.toFixed(2)}</p>
-                                <p>Will Be Spent: $${newTotal.toFixed(2)}</p>
-                                <p>Remaining After: $${(budgetLimit - newTotal).toFixed(2)}</p>
+                                <p>Budget Limit: ${budgetLimit.toFixed(2)}</p>
+                                <p>Will Be Spent: ${newTotal.toFixed(2)}</p>
+                                <p>Remaining After: ${(budgetLimit - newTotal).toFixed(2)}</p>
                             </div>
                         `,
                         icon: 'info',
@@ -468,7 +454,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
         savingsGoal = parseFloat(savingsGoalInput.value);
         savingsGoalInput.value = "";
-        savingsGoalText.innerText = `Savings Goal: $${savingsGoal.toFixed(2)}`;
+        savingsGoalText.innerText = `Savings Goal: ${savingsGoal.toFixed(2)}`;
         localStorage.setItem("savingsGoal", savingsGoal);
         updateTotals();
         
