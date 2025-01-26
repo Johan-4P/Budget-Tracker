@@ -181,22 +181,58 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Edit budget goal
     function editBudgetGoal(category) {
-        const amount = budgetGoals[category];
-        document.getElementById("budget-category").value = category;
-        document.getElementById("budget-amount").value = amount;
-        document.getElementById("budget-category-other").style.display = category === "other" ? "block" : "none";
-        document.getElementById("budget-goals").scrollIntoView({
-            behavior: "smooth"
+        Swal.fire({
+            title: 'Edit Budget Goal',
+            html: `You're about to edit the budget goal for <strong>${category}</strong>.`,
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#0d6efd',
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'Continue'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const amount = budgetGoals[category];
+                document.getElementById("budget-category").value = category;
+                document.getElementById("budget-amount").value = amount;
+                document.getElementById("budget-category-other").style.display = 
+                    category === "other" ? "block" : "none";
+                
+                document.getElementById("budget-goals").scrollIntoView({
+                    behavior: "smooth"
+                });
+
+                Swal.fire(
+                    'Ready to Edit!',
+                    'You can now modify the budget goal details above.',
+                    'info'
+                );
+            }
         });
     }
 
     // Delete budget goal
     function deleteBudgetGoal(category) {
-        if (confirm(`Are you sure you want to delete the budget goal for ${category}?`)) {
-            delete budgetGoals[category];
-            localStorage.setItem("budgetGoals", JSON.stringify(budgetGoals));
-            displayBudgetGoals();
-        }
+        Swal.fire({
+            title: 'Delete Budget Goal',
+            html: `Are you sure you want to delete the budget goal for <strong>${category}</strong>?`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#dc3545',
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                delete budgetGoals[category];
+                localStorage.setItem("budgetGoals", JSON.stringify(budgetGoals));
+                displayBudgetGoals();
+                
+                Swal.fire(
+                    'Deleted!',
+                    `Budget goal for ${category} has been removed.`,
+                    'success'
+                );
+            }
+        });
     }
 
     // Add expenses to table
@@ -230,51 +266,80 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Edit expense
     function editExpense(index) {
-        const {
-            category,
-            amount,
-            date
-        } = expenseList[index];
-        categoryInput.value = category;
-        amountInput.value = Math.abs(amount);
-        dateInput.value = date;
-        typeInput.value = amount > 0 ? "income" : "expense";
+        Swal.fire({
+            title: 'Edit Transaction',
+            text: "You're about to edit this transaction. Continue?",
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#0d6efd',
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'Yes, edit it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const { category, amount, date } = expenseList[index];
+                categoryInput.value = category;
+                amountInput.value = Math.abs(amount);
+                dateInput.value = date;
+                typeInput.value = amount > 0 ? "income" : "expense";
 
-        // Remove the expense from the list temporarily
-        deleteExpense(index, false);
+                // Remove the expense from the list temporarily
+                deleteExpense(index, false);
 
-        document.getElementById("budget-form").scrollIntoView({
-            behavior: "smooth"
+                document.getElementById("budget-form").scrollIntoView({
+                    behavior: "smooth"
+                });
+
+                Swal.fire(
+                    'Ready to Edit!',
+                    'You can now modify the transaction details above.',
+                    'info'
+                );
+            }
         });
     }
 
     // Delete expenses
     function deleteExpense(index, update = true) {
         if (expenseList[index]) {
-            const {
-                category,
-                amount
-            } = expenseList[index];
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You want to delete this transaction?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#dc3545',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const { category, amount } = expenseList[index];
 
-            if (amount > 0) {
-                totalIncome -= amount;
-            } else {
-                totalExpenses -= Math.abs(amount);
-                expenseCategories[category] -= Math.abs(amount);
+                    if (amount > 0) {
+                        totalIncome -= amount;
+                    } else {
+                        totalExpenses -= Math.abs(amount);
+                        expenseCategories[category] -= Math.abs(amount);
 
-                if (expenseCategories[category] <= 0) {
-                    delete expenseCategories[category];
+                        if (expenseCategories[category] <= 0) {
+                            delete expenseCategories[category];
+                        }
+                    }
+
+                    expenseList.splice(index, 1);
+                    saveExpensesToLocalStorage();
+
+                    if (update) {
+                        renderExpenseTable();
+                        updateCharts();
+                        updateTotals();
+                    }
+
+                    Swal.fire(
+                        'Deleted!',
+                        'Your transaction has been deleted.',
+                        'success'
+                    );
                 }
-            }
-
-            expenseList.splice(index, 1);
-            saveExpensesToLocalStorage();
-
-            if (update) {
-                renderExpenseTable();
-                updateCharts();
-                updateTotals();
-            }
+            });
         }
     }
 
