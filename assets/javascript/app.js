@@ -128,23 +128,57 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Display budget goals
     function displayBudgetGoals() {
-        budgetGoalsList.innerHTML = ""; // Clear existing list
+        budgetGoalsList.innerHTML = `
+            <div class="budget-table">
+                <div class="budget-header">
+                    <div>Category</div>
+                    <div>Budget</div>
+                    <div>Spent</div>
+                    <div>Remaining</div>
+                    <div>Progress</div>
+                    <div>Actions</div>
+                </div>
+            </div>
+        `;
+
+        const tableContainer = budgetGoalsList.querySelector('.budget-table');
 
         for (const [category, amount] of Object.entries(budgetGoals)) {
             const spent = expenseCategories[category] || 0;
             const remaining = amount - spent;
-            const listItem = document.createElement("li");
-            listItem.innerHTML = `
-                ${category}: ${amount.toFixed(2)} (Remaining: ${remaining.toFixed(2)})
-                <button class="edit-goal" data-category="${category}">Edit</button>
-                <button class="delete-goal" data-category="${category}">Delete</button>
+            const progress = (spent / amount) * 100;
+            const progressColor = remaining < 0 ? 'danger' : progress > 90 ? 'warning' : 'success';
+            
+            const row = document.createElement('div');
+            row.className = 'budget-row';
+            row.innerHTML = `
+                <div>${category}</div>
+                <div>${amount.toFixed(2)}</div>
+                <div>${spent.toFixed(2)}</div>
+                <div>${remaining.toFixed(2)}</div>
+                <div class="progress-cell">
+                    <div class="progress">
+                        <div class="progress-bar bg-${progressColor}" 
+                             role="progressbar" 
+                             style="width: ${Math.min(progress, 100)}%" 
+                             aria-valuenow="${Math.min(progress, 100)}" 
+                             aria-valuemin="0" 
+                             aria-valuemax="100">
+                            ${progress.toFixed(1)}%
+                        </div>
+                    </div>
+                </div>
+                <div class="budget-actions">
+                    <button class="edit-goal btn btn-sm btn-primary" data-category="${category}">Edit</button>
+                    <button class="delete-goal btn btn-sm btn-danger" data-category="${category}">Delete</button>
+                </div>
             `;
 
-            // Use function references instead of inline declarations
-            listItem.querySelector(".edit-goal").addEventListener("click", handleEditGoal);
-            listItem.querySelector(".delete-goal").addEventListener("click", handleDeleteGoal);
+            // Add event listeners
+            row.querySelector(".edit-goal").addEventListener("click", handleEditGoal);
+            row.querySelector(".delete-goal").addEventListener("click", handleDeleteGoal);
 
-            budgetGoalsList.appendChild(listItem);
+            tableContainer.appendChild(row);
         }
     }
 
@@ -190,8 +224,8 @@ document.addEventListener("DOMContentLoaded", () => {
             <td>${amount.toFixed(2)}</td>
             <td>${date}</td>
             <td>
-                <button class="edit-expense" data-index="${index}">Edit</button>
-                <button class="delete-expense" data-index="${index}">Delete</button>
+                <button class="edit-expense btn btn-sm btn-primary" data-index="${index}">Edit</button>
+                <button class="delete-expense btn btn-sm btn-danger" data-index="${index}">Delete</button>
             </td>
         `;
 
@@ -298,51 +332,111 @@ document.addEventListener("DOMContentLoaded", () => {
     
         if (!category || !amount || !date) return;
     
-        if (type === "income") {
-            totalIncome += amount;
-            expenseList.push({
-                category,
-                amount,
-                date
-            });
-        } else if (type === "expense") {
-            totalExpenses += amount;
-            if (!expenseCategories[category]) {
-                expenseCategories[category] = 0;
-            }
-            expenseCategories[category] += amount;
-            expenseList.push({
-                category,
-                amount: -amount,
-                date
-            });
-    
+        if (type === "expense") {
+            // Calculate the new total after adding this expense
+            const newTotal = (expenseCategories[category] || 0) + amount;
+            
+            // Check budget before adding expense
             if (budgetGoals[category]) {
-                const spent = expenseCategories[category] || 0;
-                const remainingBudget = budgetGoals[category] - spent;
-    
-                if (remainingBudget < 0) {
-                    console.log(`Budget exceeded for ${category}`);
+                const budgetLimit = budgetGoals[category];
+                
+                if (newTotal > budgetLimit) {
+                    Swal.fire({
+                        title: 'Budget Exceeded!',
+                        html: `
+                            <div style="text-align: left;">
+                                <p>Category: ${category}</p>
+                                <p>Budget Limit: $${budgetLimit.toFixed(2)}</p>
+                                <p>Current Spent: $${(expenseCategories[category] || 0).toFixed(2)}</p>
+                                <p>This Expense: $${amount.toFixed(2)}</p>
+                                <p>Will Exceed By: $${(newTotal - budgetLimit).toFixed(2)}</p>
+                            </div>
+                        `,
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Add Anyway',
+                        cancelButtonText: 'Cancel',
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#3085d6'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Add the expense if user confirms
+                            addExpense(category, amount, date);
+                        }
+                    });
+                    return; // Stop here and wait for user decision
+                } else if (newTotal > budgetLimit * 0.9) { // Warning at 90% of budget
+                    Swal.fire({
+                        title: 'Budget Warning!',
+                        html: `
+                            <div style="text-align: left;">
+                                <p>Category: ${category}</p>
+                                <p>Budget Limit: $${budgetLimit.toFixed(2)}</p>
+                                <p>Will Be Spent: $${newTotal.toFixed(2)}</p>
+                                <p>Remaining After: $${(budgetLimit - newTotal).toFixed(2)}</p>
+                            </div>
+                        `,
+                        icon: 'info',
+                        showCancelButton: true,
+                        confirmButtonText: 'Add Expense',
+                        cancelButtonText: 'Cancel',
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Add the expense if user confirms
+                            addExpense(category, amount, date);
+                        }
+                    });
+                    return; // Stop here and wait for user decision
                 }
             }
+            // If no budget or under 90%, add expense directly
+            addExpense(category, amount, date);
+        } else {
+            // Handle income directly
+            totalIncome += amount;
+            expenseList.push({ category, amount, date });
+            addExpenseToTable(category, amount, date, expenseList.length - 1);
+            updateData();
         }
-    
-        addExpenseToTable(category, type === "income" ? amount : -amount, date, expenseList.length - 1);
+    });
+
+    // Add helper function to handle expense addition
+    function addExpense(category, amount, date) {
+        totalExpenses += amount;
+        if (!expenseCategories[category]) {
+            expenseCategories[category] = 0;
+        }
+        expenseCategories[category] += amount;
+        expenseList.push({
+            category,
+            amount: -amount,
+            date
+        });
+        
+        addExpenseToTable(category, -amount, date, expenseList.length - 1);
+        updateData();
+    }
+
+    // Add helper function to update everything
+    function updateData() {
         updateCharts();
         updateTotals();
         saveExpensesToLocalStorage();
-    
+        displayBudgetGoals();
+        
+        // Clear form
         amountInput.value = "";
         dateInput.value = "";
         typeInput.value = "income";
         categoryInput.value = "select";
-        otherInput.value = "";
-        otherInput.style.display = "none";
-        displayBudgetGoals();
-    
+        document.getElementById("category-other").value = "";
+        document.getElementById("category-other").style.display = "none";
+        
         // Reset form validation state
-        form.classList.remove('was-validated');
-    });
+        document.getElementById('budget-form').classList.remove('was-validated');
+    }
 
     // Show/hide "Other" category input
     categoryInput.addEventListener("change", () => {
@@ -384,22 +478,38 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Restore data
     resetButton.addEventListener("click", () => {
-        if (confirm("Are you sure you want to reset all data?")) {
-            totalIncome = 0;
-            totalExpenses = 0;
-            savingsGoal = 0;
-            expenseList.length = 0;
-            Object.keys(expenseCategories).forEach((key) => delete expenseCategories[key]);
-            Object.keys(budgetGoals).forEach((key) => delete budgetGoals[key]);
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You want to reset all data?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, reset it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                totalIncome = 0;
+                totalExpenses = 0;
+                savingsGoal = 0;
+                expenseList.length = 0;
+                Object.keys(expenseCategories).forEach((key) => delete expenseCategories[key]);
+                Object.keys(budgetGoals).forEach((key) => delete budgetGoals[key]);
 
-            localStorage.clear();
-            renderExpenseTable();
-            updateCharts();
-            updateTotals();
-            savingsGoalText.innerText = "Savings Goal: $0";
-            savingsProgressText.innerText = "Savings Progress: 0%";
-            displayBudgetGoals();
-        }
+                localStorage.clear();
+                renderExpenseTable();
+                updateCharts();
+                updateTotals();
+                savingsGoalText.innerText = "Savings Goal: $0";
+                savingsProgressText.innerText = "Savings Progress: 0%";
+                displayBudgetGoals();
+
+                Swal.fire(
+                    'Reset Complete!',
+                    'Your data has been reset successfully.',
+                    'success'
+                );
+            }
+        });
     });
 
     // Load stored data
@@ -486,10 +596,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             }
         });
-    }
+}
 
-    // Add event listener for saving budget goals
-    saveBudgetButton.addEventListener("click", saveBudgetGoal);
+// Add event listener for saving budget goals
+saveBudgetButton.addEventListener("click", saveBudgetGoal);
 
     loadStoredData();
     updateTotals();
@@ -499,5 +609,12 @@ document.addEventListener("DOMContentLoaded", () => {
 // Make togglePopup globally available since it's used in HTML
 window.togglePopup = function(element) {
     const popupText = element.querySelector('.popuptext');
+    popupText.classList.toggle('show');
+};
+
+// Fix missing myFunction reference used in HTML
+window.myFunction = function() {
+    // Using the same functionality as togglePopup for consistency
+    const popupText = event.currentTarget.querySelector('.popuptext');
     popupText.classList.toggle('show');
 };
