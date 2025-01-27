@@ -677,11 +677,41 @@ canvas {
     margin: 0 auto 1rem;
 }
 
+/* Budget Goals Overview Responsive Styles */
+.budget-table {
+    width: 100%;
+    background: #ffffff;
+    border-radius: 8px;
+    overflow-x: auto;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+}
+
+.budget-header,
+.budget-row {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr 2fr 1fr;
+}
 
 
-/* Mobile responsiveness for the table */
-@media screen and (max-width: 768px) {
+/* Media Queries */
 
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    #charts-container {
+        flex-direction: column-reverse;
+    }
+
+    #summary,
+    #budget-goals-display,
+    #information,
+    #budget-goals,
+    #savings-section,
+    #expense-list {
+        width: auto;
+        margin: 10px;
+        padding: 15px;
+    }
     #budget-goals-table,
     #budget-goals-table tbody,
     #budget-goals-table tr,
@@ -691,7 +721,6 @@ canvas {
 
     #budget-goals-table thead {
         display: none;
-        /* Hide headers on mobile */
     }
 
     #budget-goals-table tr {
@@ -735,50 +764,6 @@ canvas {
 
     #budget-goals-table .progress {
         width: 100%;
-    }
-}
-
-/* Remove old styles that might conflict */
-.budget-table,
-.budget-header,
-.budget-row {
-    display: none;
-}
-
-/* Budget Goals Overview Responsive Styles */
-.budget-table {
-    width: 100%;
-    background: #ffffff;
-    border-radius: 8px;
-    overflow-x: auto;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 1rem;
-}
-
-.budget-header,
-.budget-row {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr 1fr 2fr 1fr;
-}
-
-
-/* Media Queries */
-
-/* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {
-    #charts-container {
-        flex-direction: column-reverse;
-    }
-
-    #summary,
-    #budget-goals-display,
-    #information,
-    #budget-goals,
-    #savings-section,
-    #expense-list {
-        width: auto;
-        margin: 10px;
-        padding: 15px;
     }
 
     .form-section {
@@ -821,61 +806,6 @@ canvas {
 
 /* Medium devices (tablets, 768px and down) */
 @media screen and (max-width: 768px) {
-
-    #budget-goals-table,
-    #budget-goals-table tbody,
-    #budget-goals-table tr,
-    #budget-goals-table td {
-        display: block;
-
-    }
-
-    #budget-goals-table thead {
-        display: none;
-    }
-
-    #budget-goals-table tr {
-        margin-bottom: 1rem;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        background: #fff;
-        padding: 8px;
-    }
-
-    #budget-goals-table td {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 8px;
-        border: none;
-        border-bottom: 1px solid #eee;
-    }
-
-    #budget-goals-table td:last-child {
-        border-bottom: none;
-    }
-
-    #budget-goals-table td::before {
-        content: attr(data-label);
-        font-weight: bold;
-        margin-right: 1rem;
-        min-width: 100px;
-        text-align: left;
-    }
-
-    #budget-goals-table .progress-cell {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    #budget-goals-table .progress-cell::before {
-        margin-bottom: 8px;
-        align-self: flex-start;
-    }
-
-    #budget-goals-table .progress {
-        width: 100%;
-    }
 
     #charts-container {
         flex-direction: column;
