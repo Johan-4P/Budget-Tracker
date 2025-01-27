@@ -1,4 +1,4 @@
-/* global Chart */
+/* global Chart, Swal */  // Add Swal to global declarations
 // jshint esversion: 6
 // jshint esversion: 10
 document.addEventListener("DOMContentLoaded", () => {
@@ -28,7 +28,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const balanceDisplay = document.getElementById("balance");
 
     // savings section
-    const savingsGoalInput = document.getElementById("savingsGoal");
     const updateSavingsButton = document.getElementById("update-savings");
     const saveBudgetButton = document.getElementById("save-budget");
     const savingsGoalText = document.getElementById("savings-goal-text");

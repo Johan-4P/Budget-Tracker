@@ -37,7 +37,7 @@ Visit the deployed site: [Budget Tracker](https://johan-4p.github.io/Budget-Trac
 ## User Experience (UX)
 
 ### Target Audience
-* Those who are looking for a page that can give them the information they want.
+* Budget Tracker is a website there you can go to if you want to get hold on your economy
 
 #### User Stories
 
@@ -166,6 +166,8 @@ HTML,CSS,JavaScript
 * [JSHint JavaScript Validator](https://jshint.com/) - To check the JavaScript code.
 
 * [Chart.js](https://www.chartjs.org/) - A JavaScript library.
+
+* [SweetAlert2](https://sweetalert2.github.io/) - A JavaScript library.
 
 * [Bootstrap](https://getbootstrap.com/) - A HTML & JavaScript library.
 
