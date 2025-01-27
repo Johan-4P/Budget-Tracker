@@ -61,27 +61,27 @@ I used Lighthouse within the Chrome Developer Tools to test the performance, acc
 
 | Goals | How are they achieved? |
 | :--- | :--- |
-| | |
-| |
-| | |
+| As a user, i want to input my income and expenses so i can track my financial situation. | I have placed the input forms so they are almost the first thing you will see. |
+| As a user, i want to set budget goals for different categories so that i can plan my spending. | I made that possible by making a table there you can have a controlled overview over your budget.
+| As a user, i want to see a summary of my financial data in charts so that i can easily understand my financial situation. | You will have the charts placed in the middle of the page, and by just hoover over them you can see just that expense.
+ |
 
 
 `Returning Visitors`
 
 | Goals | How are they achieved? |
 | :--- | :--- |
-| | |
-| |
-| | |
+| I want to be able to com back after few days and see that my data is still there | I have done so that all is localstorage  
+|
 
 
 `Frequent Visitors`
 
 | Goals | How are they achieved? |
 | :--- | :--- |
-| | |
-| |
-| | |
+| Easily see and integrate with numbers. | The summary section is placed in the middle so you easy can see and its easy to understand. |
+| That you can continue to follow your budget and savings goals and keep track on them. | All is saved so the site will keep the numbers .
+|
 
 
 ### Full Testing
