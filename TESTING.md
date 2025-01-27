@@ -53,6 +53,37 @@ I used Lighthouse within the Chrome Developer Tools to test the performance, acc
 * ![index.html](assets/images/mobile-light.png) - Good results.
 ---
 
+## MANUAL TESTING
+
+### Testing User Stories
+
+`First Time Visitors`
+
+| Goals | How are they achieved? |
+| :--- | :--- |
+| | |
+| |
+| | |
+
+
+`Returning Visitors`
+
+| Goals | How are they achieved? |
+| :--- | :--- |
+| | |
+| |
+| | |
+
+
+`Frequent Visitors`
+
+| Goals | How are they achieved? |
+| :--- | :--- |
+| | |
+| |
+| | |
+
+
 ### Full Testing
 
 Full Testing was performed on the following devices:

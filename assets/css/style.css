@@ -186,6 +186,7 @@ main {
     max-width: 800px;
     margin: 10px auto 20px;
 }
+
 #budget-goals-display h2 {
     color: white;
     margin-bottom: 10px;
@@ -208,7 +209,7 @@ main {
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 6px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .budget-goal-item h4 {
@@ -311,7 +312,7 @@ form button:hover {
     color: #dc3545;
 }
 
-.was-validated .form-control:invalid ~ .invalid-feedback {
+.was-validated .form-control:invalid~.invalid-feedback {
     display: block;
 }
 
@@ -425,7 +426,6 @@ form button:hover {
     background: #0056b3;
 }
 
-/* Improved Budget Goals Form Styling */
 #budget-goals-form {
     max-width: 500px;
     margin: 0 auto;
@@ -490,6 +490,54 @@ form button:hover {
     transform: translateY(-1px);
 }
 
+.budget-table,
+.budget-header,
+.budget-row {
+    display: none;
+}
+
+#budget-goals-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background: white;
+}
+
+#budget-goals-table th {
+    background-color: #007bff;
+    color: white;
+    border: 1px solid #000;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 1.0);
+    padding: 12px;
+    text-align: center;
+}
+
+#budget-goals-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+#budget-goals-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#budget-goals-table tr:hover {
+    background-color: #eef6ff;
+}
+
+#budget-goals-table .progress-cell {
+    min-width: 150px;
+    padding: 10px;
+}
+
+#budget-goals-table .progress {
+    margin: 0;
+    height: 20px;
+}
+
+
 /* Charts */
 #charts-container {
     display: flex;
@@ -552,12 +600,13 @@ canvas {
 }
 
 /* Update expense table buttons */
-.edit-expense, .delete-expense {
+.edit-expense,
+.delete-expense {
     padding: 4px 8px;
     font-size: 0.8rem;
     margin: 0 2px;
     border-radius: 4px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     min-width: 60px;
 }
 
@@ -628,66 +677,21 @@ canvas {
     margin: 0 auto 1rem;
 }
 
-/* New styles for the table layout */
-.budget-table,
-.budget-header,
-.budget-row {
-    display: none;
-}
 
-/* Budget Goals Table Styling */
-#budget-goals-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-    background: white;
-}
-
-#budget-goals-table th {
-    background-color: #007bff;
-    color: white;
-    border: 1px solid #000;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 1.0);
-    padding: 12px;
-    text-align: center;
-}
-
-#budget-goals-table td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: center;
-    text-transform: capitalize;
-}
-
-#budget-goals-table tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-#budget-goals-table tr:hover {
-    background-color: #eef6ff;
-}
-
-#budget-goals-table .progress-cell {
-    min-width: 150px;
-    padding: 10px;
-}
-
-#budget-goals-table .progress {
-    margin: 0;
-    height: 20px;
-}
 
 /* Mobile responsiveness for the table */
 @media screen and (max-width: 768px) {
-    #budget-goals-table, 
-    #budget-goals-table tbody, 
-    #budget-goals-table tr, 
+
+    #budget-goals-table,
+    #budget-goals-table tbody,
+    #budget-goals-table tr,
     #budget-goals-table td {
         display: block;
     }
 
     #budget-goals-table thead {
-        display: none; /* Hide headers on mobile */
+        display: none;
+        /* Hide headers on mobile */
     }
 
     #budget-goals-table tr {
@@ -747,82 +751,14 @@ canvas {
     background: #ffffff;
     border-radius: 8px;
     overflow-x: auto;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 1rem;
 }
 
-.budget-header, .budget-row {
+.budget-header,
+.budget-row {
     display: grid;
     grid-template-columns: 1.5fr 1fr 1fr 1fr 2fr 1fr;
-}
-
-@media screen and (max-width: 768px) {
-    #budget-goals-display {
-        margin: 10px;
-        padding: 10px;
-        width: min-content;
-    }
-
-    .budget-table {
-        font-size: 0.9rem;
-    }
-
-    .budget-row {
-        display: flex;
-        flex-direction: column;
-        padding: 12px;
-        margin-bottom: 12px;
-        background: #fff;
-        border-radius: 8px;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    }
-
-    .budget-header {
-        display: none;
-    }
-
-    .budget-row div {
-        display: flex;
-        justify-content: space-between;
-        padding: 8px 0;
-        border-bottom: 1px solid #eee;
-    }
-
-    .budget-row div:last-child {
-        border-bottom: none;
-    }
-
-    .budget-row div::before {
-        content: attr(data-label);
-        font-weight: bold;
-        margin-right: 8px;
-        color: #666;
-    }
-
-    .progress-cell {
-        flex-direction: column;
-        align-items: stretch !important;
-    }
-
-    .progress-cell::before {
-        margin-bottom: 8px;
-    }
-
-    .progress {
-        width: 100%;
-        margin: 4px 0;
-    }
-
-    .budget-actions {
-        justify-content: flex-start;
-        gap: 8px;
-        padding-top: 8px;
-    }
-
-    .budget-actions button {
-        flex: 1;
-        max-width: 120px;
-    }
 }
 
 
@@ -885,11 +821,13 @@ canvas {
 
 /* Medium devices (tablets, 768px and down) */
 @media screen and (max-width: 768px) {
-    #budget-goals-table, 
-    #budget-goals-table tbody, 
-    #budget-goals-table tr, 
+
+    #budget-goals-table,
+    #budget-goals-table tbody,
+    #budget-goals-table tr,
     #budget-goals-table td {
         display: block;
+
     }
 
     #budget-goals-table thead {
@@ -942,6 +880,73 @@ canvas {
     #charts-container {
         flex-direction: column;
         align-items: center;
+    }
+
+    #budget-goals-display {
+        margin: 10px;
+        padding: 10px;
+        width: min-content;
+    }
+
+    .budget-table {
+        font-size: 0.9rem;
+    }
+
+    .budget-row {
+        display: flex;
+        flex-direction: column;
+        padding: 12px;
+        margin-bottom: 12px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .budget-header {
+        display: none;
+    }
+
+    .budget-row div {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 0;
+        border-bottom: 1px solid #eee;
+    }
+
+    .budget-row div:last-child {
+        border-bottom: none;
+    }
+
+    .budget-row div::before {
+        content: attr(data-label);
+        font-weight: bold;
+        margin-right: 8px;
+        color: #666;
+    }
+
+    .progress-cell {
+        flex-direction: column;
+        align-items: stretch !important;
+    }
+
+    .progress-cell::before {
+        margin-bottom: 8px;
+    }
+
+    .progress {
+        width: 100%;
+        margin: 4px 0;
+    }
+
+    .budget-actions {
+        justify-content: flex-start;
+        gap: 8px;
+        padding-top: 8px;
+    }
+
+    .budget-actions button {
+        flex: 1;
+        max-width: 120px;
     }
 }
 
