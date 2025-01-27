@@ -1,4 +1,4 @@
-/* global Chart, Swal */  // Add Swal to global declarations
+/* global Chart, Swal */ // Add Swal to global declarations
 // jshint esversion: 6
 // jshint esversion: 10
 document.addEventListener("DOMContentLoaded", () => {
@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Reset section
     const resetButton = document.getElementById("reset");
-   
+
 
 
 
@@ -84,43 +84,43 @@ document.addEventListener("DOMContentLoaded", () => {
     function saveBudgetGoal() {
         const form = document.getElementById('budget-goals-form');
         const categoryOther = document.getElementById('budget-category-other');
-        
+
         // Enable validation on category-other only when it's visible
         if (budgetCategoryInput.value === 'other') {
             categoryOther.setAttribute('required', '');
         } else {
             categoryOther.removeAttribute('required');
         }
-        
+
         // Add Bootstrap validation classes
         form.classList.add('was-validated');
-    
+
         if (!form.checkValidity()) {
             return; // Stop if form is invalid
         }
-    
+
         let category = budgetCategoryInput.value;
         const amount = parseFloat(document.getElementById("budget-amount").value) || 0;
-    
+
         if (category === "select" || amount <= 0) {
             return;
         }
-    
+
         if (category === "other") {
             category = categoryOther.value.trim();
             if (!category) return;
         }
-    
+
         budgetGoals[category] = amount;
         localStorage.setItem("budgetGoals", JSON.stringify(budgetGoals));
         displayBudgetGoals();
-    
+
         // Clear input fields
         budgetCategoryInput.value = "select";
         document.getElementById("budget-amount").value = "";
         categoryOther.value = "";
         categoryOther.style.display = "none";
-        
+
         // Reset validation state
         form.classList.remove('was-validated');
     }
@@ -134,7 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const remaining = amount - spent;
             const progress = (spent / amount) * 100;
             const progressColor = remaining < 0 ? 'danger' : progress > 90 ? 'warning' : 'success';
-            
+
             const row = document.createElement('tr');
             row.innerHTML = `
                 <td data-label="Category">${category}</td>
@@ -193,9 +193,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 const amount = budgetGoals[category];
                 document.getElementById("budget-category").value = category;
                 document.getElementById("budget-amount").value = amount;
-                document.getElementById("budget-category-other").style.display = 
+                document.getElementById("budget-category-other").style.display =
                     category === "other" ? "block" : "none";
-                
+
                 document.getElementById("budget-goals").scrollIntoView({
                     behavior: "smooth"
                 });
@@ -224,7 +224,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 delete budgetGoals[category];
                 localStorage.setItem("budgetGoals", JSON.stringify(budgetGoals));
                 displayBudgetGoals();
-                
+
                 Swal.fire(
                     'Deleted!',
                     `Budget goal for ${category} has been removed.`,
@@ -275,7 +275,11 @@ document.addEventListener("DOMContentLoaded", () => {
             confirmButtonText: 'Yes, edit it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                const { category, amount, date } = expenseList[index];
+                const {
+                    category,
+                    amount,
+                    date
+                } = expenseList[index];
                 categoryInput.value = category;
                 amountInput.value = Math.abs(amount);
                 dateInput.value = date;
@@ -310,7 +314,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    const { category, amount } = expenseList[index];
+                    const {
+                        category,
+                        amount
+                    } = expenseList[index];
 
                     if (amount > 0) {
                         totalIncome -= amount;
@@ -353,43 +360,43 @@ document.addEventListener("DOMContentLoaded", () => {
     addDataButton.addEventListener("click", () => {
         const form = document.getElementById('budget-form');
         const categoryOther = document.getElementById('category-other');
-        
+
         // Enable validation on category-other only when it's visible
         if (categoryInput.value === 'other') {
             categoryOther.setAttribute('required', '');
         } else {
             categoryOther.removeAttribute('required');
         }
-        
+
         // Add Bootstrap validation classes
         form.classList.add('was-validated');
-    
+
         if (!form.checkValidity()) {
             return; // Stop if form is invalid
         }
-    
+
         let category = categoryInput.value;
         const otherInput = document.getElementById("category-other");
-    
+
         if (category === "other") {
             category = otherInput.value.trim();
             if (!category) return;
         }
-    
+
         const amount = parseFloat(amountInput.value) || 0;
         const type = typeInput.value;
         const date = dateInput.value;
-    
+
         if (!category || !amount || !date) return;
-    
+
         if (type === "expense") {
             // Calculate the new total after adding this expense
             const newTotal = (expenseCategories[category] || 0) + amount;
-            
+
             // Check budget before adding expense
             if (budgetGoals[category]) {
                 const budgetLimit = budgetGoals[category];
-                
+
                 if (newTotal > budgetLimit) {
                     Swal.fire({
                         title: 'Budget Exceeded!',
@@ -446,7 +453,11 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
             // Handle income directly
             totalIncome += amount;
-            expenseList.push({ category, amount, date });
+            expenseList.push({
+                category,
+                amount,
+                date
+            });
             addExpenseToTable(category, amount, date, expenseList.length - 1);
             updateData();
         }
@@ -464,7 +475,7 @@ document.addEventListener("DOMContentLoaded", () => {
             amount: -amount,
             date
         });
-        
+
         addExpenseToTable(category, -amount, date, expenseList.length - 1);
         updateData();
     }
@@ -475,7 +486,7 @@ document.addEventListener("DOMContentLoaded", () => {
         updateTotals();
         saveExpensesToLocalStorage();
         displayBudgetGoals();
-        
+
         // Clear form
         amountInput.value = "";
         dateInput.value = "";
@@ -483,7 +494,7 @@ document.addEventListener("DOMContentLoaded", () => {
         categoryInput.value = "select";
         document.getElementById("category-other").value = "";
         document.getElementById("category-other").style.display = "none";
-        
+
         // Reset form validation state
         document.getElementById('budget-form').classList.remove('was-validated');
     }
@@ -508,20 +519,20 @@ document.addEventListener("DOMContentLoaded", () => {
     updateSavingsButton.addEventListener("click", () => {
         const savingsForm = document.getElementById('savings-form');
         const savingsGoalInput = document.getElementById("savingsGoal");
-        
+
         // Add Bootstrap validation classes
         savingsForm.classList.add('was-validated');
-    
+
         if (!savingsForm.checkValidity() || parseFloat(savingsGoalInput.value) <= 0) {
             return;
         }
-    
+
         savingsGoal = parseFloat(savingsGoalInput.value);
         savingsGoalInput.value = "";
         savingsGoalText.innerText = `Savings Goal: ${savingsGoal.toFixed(2)}`;
         localStorage.setItem("savingsGoal", savingsGoal);
         updateTotals();
-        
+
         // Reset validation state
         savingsForm.classList.remove('was-validated');
     });
@@ -623,8 +634,7 @@ document.addEventListener("DOMContentLoaded", () => {
             type: 'bar',
             data: {
                 labels: ['Income & Expenses'],
-                datasets: [
-                    {
+                datasets: [{
                         label: 'Income',
                         data: [income],
                         backgroundColor: '#4CAF50'
@@ -646,10 +656,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             }
         });
-}
+    }
 
-// Add event listener for saving budget goals
-saveBudgetButton.addEventListener("click", saveBudgetGoal);
+    // Add event listener for saving budget goals
+    saveBudgetButton.addEventListener("click", saveBudgetGoal);
 
     loadStoredData();
     updateTotals();
@@ -657,13 +667,13 @@ saveBudgetButton.addEventListener("click", saveBudgetGoal);
 });
 
 // Make togglePopup globally available since it's used in HTML
-window.togglePopup = function(element) {
+window.togglePopup = function (element) {
     const popupText = element.querySelector('.popuptext');
     popupText.classList.toggle('show');
 };
 
 // Fix missing myFunction reference used in HTML
-window.myFunction = function() {
+window.myFunction = function () {
     // Using the same functionality as togglePopup for consistency
     const popupText = event.currentTarget.querySelector('.popuptext');
     popupText.classList.toggle('show');
