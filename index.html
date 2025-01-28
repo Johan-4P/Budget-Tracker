@@ -38,6 +38,7 @@
             </a>
         </div>
     </nav>
+    <!-- Header section -->
     <header>
         <section class="card-1">
             <div id="card-1-div">
@@ -70,7 +71,6 @@
                     bottom of the page.
                 </p>
             </div>
-
             <div id="inputs">
                 <h2>Enter your budget data</h2>
                 <form id="budget-form" class="needs-validation" novalidate>
@@ -106,7 +106,7 @@
                             </span> Choose Category:
                         </label>
                         <select class="form-control" id="category" required>
-                            <option value="select">Select</option>
+                            <option value="" selected disabled>Select</option>
                             <option value="salary">Salary</option>
                             <option value="bonus">Bonus</option>
                             <option value="gift">Gift</option>
@@ -186,7 +186,7 @@
                 <div class="form-group">
                     <label for="budget-category">Category</label>
                     <select class="form-control" id="budget-category" required>
-                        <option value="select">Select</option>
+                        <option value="" selected disabled>Select</option>
                         <option value="food">Food</option>
                         <option value="housing">Housing</option>
                         <option value="transportation">Transportation</option>
