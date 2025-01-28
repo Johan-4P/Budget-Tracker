@@ -173,7 +173,7 @@ main {
         opacity: 1;
     }
 }
-
+/* Budget goals */
 #budget-goals-display {
     background: linear-gradient(90deg, #007bff, #0056b3);
     color: #333;
@@ -249,7 +249,7 @@ main {
     padding: 4px 8px;
     font-size: 0.8rem;
 }
-
+/* Input section */
 #inputs {
     margin-bottom: 30px;
 }
@@ -316,7 +316,7 @@ form button:hover {
     display: block;
 }
 
-/* Summary */
+/* Summary section */
 #summary {
     background: linear-gradient(90deg, #007bff, #0056b3);
     color: white;
@@ -337,7 +337,7 @@ form button:hover {
     color: #007bff;
 }
 
-/* Savings */
+/* Savings section */
 #savings-section {
     margin: 30px 0;
     text-align: center;
